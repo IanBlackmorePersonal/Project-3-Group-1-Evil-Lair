@@ -28,6 +28,7 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
 
+
 int main ()
 {
 	// Tell the window to use vysnc and work on high DPI displays
