@@ -269,12 +269,14 @@
     <ClInclude Include="..\..\include\resource_dir.h" />
     <ClInclude Include="Drone.h" />
     <ClInclude Include="DroneSystem.h" />
+    <ClInclude Include="UndergroundGarden.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="Drone.cpp" />
     <ClCompile Include="DroneSystem.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="UndergroundGarden.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="raylib.vcxproj">

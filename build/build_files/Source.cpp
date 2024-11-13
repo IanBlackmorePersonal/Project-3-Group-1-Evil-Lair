@@ -28,6 +28,7 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
 #include "DroneSystem.h"
+#include "UndergroundGarden.h"
 #include <iostream>
 
 int main()
@@ -37,6 +38,12 @@ int main()
 	std::cout << "Drones status base = " << d.drones[0]->getStatus() << std::endl;
 	d.deployDrones();
 	std::cout << "Drones status deployed = " << d.drones[0]->getStatus() << std::endl;
+
+
+	UndergroundGarden u;
+	std::cout << "Humidity = " << u.getHumidity() << std::endl;
+	u.setHumidity(70);
+	std::cout << "Humidity after set = " << u.getHumidity() << std::endl;
 
 	// Tell the window to use vysnc and work on high DPI displays
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
