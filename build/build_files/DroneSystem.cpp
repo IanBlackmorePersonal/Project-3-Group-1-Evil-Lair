@@ -7,6 +7,12 @@ DroneSystem::DroneSystem() {
 		drones.push_back(ptr);
 	}
 }
+DroneSystem::DroneSystem(int amount) {
+	for (int i = 0; i < amount; i++) {
+		Drone* ptr = new Drone;
+		drones.push_back(ptr);
+	}
+}
 DroneSystem::~DroneSystem() {
 	for (int i = 0; i < drones.size(); i++) {
 		delete drones[i];

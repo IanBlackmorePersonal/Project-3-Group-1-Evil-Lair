@@ -274,6 +274,7 @@
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="Drone.cpp" />
     <ClCompile Include="DroneSystem.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="raylib.vcxproj">
