@@ -272,10 +272,9 @@
     <ClInclude Include="UndergroundGarden.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="Drone.cpp" />
     <ClCompile Include="DroneSystem.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="UndergroundGarden.cpp" />
   </ItemGroup>
   <ItemGroup>

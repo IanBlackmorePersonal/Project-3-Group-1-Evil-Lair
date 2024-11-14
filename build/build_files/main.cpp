@@ -31,6 +31,8 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 #include "UndergroundGarden.h"
 #include <iostream>
 
+
+
 int main()
 {
 	DroneSystem d(4);
@@ -53,10 +55,10 @@ int main()
 	InitWindow(1600, 1000, "LairHMI");
 
 	// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
-	SearchAndSetResourceDir("resources");
+	SearchAndSetResourceDir("Screens");
 
 	// Load a texture from the resources directory
-	Texture wabbit = LoadTexture("wabbit_alpha.png");
+	Texture background = LoadTexture("MainSelectScreenLairHMI.png");
 
 	// game loop
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
@@ -68,10 +70,10 @@ int main()
 		ClearBackground(BLACK);
 
 		// draw some text using the default font
-		DrawText("Hello Raylib", 200, 200, 20, WHITE);
+		//DrawText("Hello Raylib", 200, 200, 20, WHITE);
 
 		// draw our texture to the screen
-		DrawTexture(wabbit, 400, 200, WHITE);
+		DrawTexture(background, 400, 200, WHITE);
 
 		// end the frame and get ready for the next one  (display frame, poll input, etc...)
 		EndDrawing();
@@ -79,7 +81,7 @@ int main()
 
 	// cleanup
 	// unload our texture so it can be cleaned up
-	UnloadTexture(wabbit);
+	UnloadTexture(background);
 
 	// destory the window and cleanup the OpenGL context
 	CloseWindow();
