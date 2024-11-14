@@ -31,8 +31,6 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 #include "UndergroundGarden.h"
 #include <iostream>
 
-
-
 int main()
 {
 	DroneSystem d(4);
@@ -73,7 +71,7 @@ int main()
 		//DrawText("Hello Raylib", 200, 200, 20, WHITE);
 
 		// draw our texture to the screen
-		DrawTexture(background, 400, 200, WHITE);
+		DrawTexture(background, 0, 0, WHITE);
 
 		// end the frame and get ready for the next one  (display frame, poll input, etc...)
 		EndDrawing();
