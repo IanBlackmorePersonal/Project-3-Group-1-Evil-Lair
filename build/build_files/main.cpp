@@ -78,7 +78,7 @@ int main() {
 	// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
 	SearchAndSetResourceDir("Screens");
 
-	// Load a texture from the resources directory
+	// Load a texture from the Screens directory
 	Texture background = LoadTexture("MainSelectScreenLairHMI.png");
 
 
@@ -141,9 +141,6 @@ int main() {
 
 		// Setup the backbuffer for drawing (clear color and depth buffers)
 		ClearBackground(BLACK);
-
-		// draw some text using the default font
-		//DrawText("Hello Raylib", 200, 200, 20, WHITE);
 		
 		// draw our texture to the screen
 		DrawTexture(background, 0, 0, WHITE);
