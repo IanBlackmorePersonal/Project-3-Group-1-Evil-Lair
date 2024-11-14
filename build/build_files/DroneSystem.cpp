@@ -1,6 +1,6 @@
 #include "DroneSystem.h"
 
-#define DEFAULT_DRONE_AMOUNT 4
+#define DEFAULT_DRONE_AMOUNT 3
 DroneSystem::DroneSystem() {
 	for (int i = 0; i < DEFAULT_DRONE_AMOUNT; i++) {
 		Drone* ptr = new Drone;

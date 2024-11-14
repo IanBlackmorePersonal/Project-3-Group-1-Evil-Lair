@@ -33,7 +33,7 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 
 int main()
 {
-	DroneSystem d(4);
+	DroneSystem d(3);
 	std::cout << "Drones amount = " << d.drones.size() << std::endl;
 	std::cout << "Drones status base = " << d.drones[0]->getStatus() << std::endl;
 	d.deployDrones();
