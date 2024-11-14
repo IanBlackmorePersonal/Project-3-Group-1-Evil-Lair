@@ -31,8 +31,28 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 #include "UndergroundGarden.h"
 #include <iostream>
 
-int main()
-{
+#define BUTTON_WIDTH 500
+#define BUTTON_HEIGHT 100
+#define DRONE_SYSTEM_BUTTON_X 900
+#define DRONE_SYSTEM_BUTTON_Y 685
+
+#define GARDEN_BUTTON_X 200
+#define GARDEN_BUTTON_Y 685
+
+#define FACILITY_BUTTON_X 200
+#define FACILITY_BUTTON_Y 85
+
+#define MONSTER_BUTTON_X 200
+#define MONSTER_BUTTON_Y 385
+
+#define AQUARIUM_BUTTON_X 900
+#define AQUARIUM_BUTTON_Y 85
+
+#define LASER_BUTTON_X 900
+#define LASER_BUTTON_Y 385
+
+
+int main() {
 	DroneSystem d(3);
 	std::cout << "Drones amount = " << d.drones.size() << std::endl;
 	std::cout << "Drones status base = " << d.drones[0]->getStatus() << std::endl;
@@ -50,7 +70,10 @@ int main()
 
 	// Create the window and OpenGL context
 
-	InitWindow(1600, 1000, "LairHMI");
+	int screenWidth = 1600;
+	int screenHeight = 1000;
+
+	InitWindow(screenWidth, screenHeight, "LairHMI");
 
 	// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
 	SearchAndSetResourceDir("Screens");
@@ -58,9 +81,61 @@ int main()
 	// Load a texture from the resources directory
 	Texture background = LoadTexture("MainSelectScreenLairHMI.png");
 
-	// game loop
+
+
+	Vector2 mousePoint = { 0.0f, 0.0f };
+
+	SetTargetFPS(60);
+	// HMI loop
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{
+		
+		mousePoint = GetMousePosition();
+		// these ifs all determine if the mouse is within a button's boundaries and if the mouse is clicked
+		if (mousePoint.x > DRONE_SYSTEM_BUTTON_X && mousePoint.x < DRONE_SYSTEM_BUTTON_X + BUTTON_WIDTH) {
+			if (mousePoint.y > DRONE_SYSTEM_BUTTON_Y && mousePoint.y < DRONE_SYSTEM_BUTTON_Y + BUTTON_HEIGHT) {
+				if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+					std::cout << "clicked drone system button" << std::endl;
+				}
+			}
+		}
+		if (mousePoint.x > GARDEN_BUTTON_X && mousePoint.x < GARDEN_BUTTON_X + BUTTON_WIDTH) {
+			if (mousePoint.y > GARDEN_BUTTON_Y && mousePoint.y < GARDEN_BUTTON_Y + BUTTON_HEIGHT) {
+				if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+					std::cout << "clicked garden system button" << std::endl;
+				}
+			}
+		}
+		if (mousePoint.x > AQUARIUM_BUTTON_X && mousePoint.x < AQUARIUM_BUTTON_X + BUTTON_WIDTH) {
+			if (mousePoint.y > AQUARIUM_BUTTON_Y && mousePoint.y < AQUARIUM_BUTTON_Y + BUTTON_HEIGHT) {
+				if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+					std::cout << "clicked aquarium system button" << std::endl;
+				}
+			}
+		}
+		if (mousePoint.x > FACILITY_BUTTON_X && mousePoint.x < FACILITY_BUTTON_X + BUTTON_WIDTH) {
+			if (mousePoint.y > FACILITY_BUTTON_Y && mousePoint.y < FACILITY_BUTTON_Y + BUTTON_HEIGHT) {
+				if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+					std::cout << "clicked facility system button" << std::endl;
+				}
+			}
+		}
+		if (mousePoint.x > LASER_BUTTON_X && mousePoint.x < LASER_BUTTON_X + BUTTON_WIDTH) {
+			if (mousePoint.y > LASER_BUTTON_Y && mousePoint.y < LASER_BUTTON_Y + BUTTON_HEIGHT) {
+				if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+					std::cout << "clicked laser system button" << std::endl;
+				}
+			}
+		}
+		if (mousePoint.x > MONSTER_BUTTON_X && mousePoint.x < MONSTER_BUTTON_X + BUTTON_WIDTH) {
+			if (mousePoint.y > MONSTER_BUTTON_Y && mousePoint.y < MONSTER_BUTTON_Y + BUTTON_HEIGHT) {
+				if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+					std::cout << "clicked monster system button" << std::endl;
+				}
+			}
+		}
+
+		
 		// drawing
 		BeginDrawing();
 
@@ -69,14 +144,14 @@ int main()
 
 		// draw some text using the default font
 		//DrawText("Hello Raylib", 200, 200, 20, WHITE);
-
+		
 		// draw our texture to the screen
 		DrawTexture(background, 0, 0, WHITE);
 
 		// end the frame and get ready for the next one  (display frame, poll input, etc...)
 		EndDrawing();
-	}
 
+	}
 	// cleanup
 	// unload our texture so it can be cleaned up
 	UnloadTexture(background);
@@ -84,4 +159,5 @@ int main()
 	// destory the window and cleanup the OpenGL context
 	CloseWindow();
 	return 0;
+
 }
