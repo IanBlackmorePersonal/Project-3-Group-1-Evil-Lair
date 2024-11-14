@@ -269,11 +269,13 @@
     <ClInclude Include="..\..\include\resource_dir.h" />
     <ClInclude Include="Drone.h" />
     <ClInclude Include="DroneSystem.h" />
+    <ClInclude Include="HMIHandler.h" />
     <ClInclude Include="UndergroundGarden.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Drone.cpp" />
     <ClCompile Include="DroneSystem.cpp" />
+    <ClCompile Include="HMIHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UndergroundGarden.cpp" />
   </ItemGroup>
