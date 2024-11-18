@@ -21,10 +21,7 @@
     <ClInclude Include="UndergroundGarden.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Laser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Radar.h">
+    <ClInclude Include="HMIHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,10 +38,7 @@
     <ClCompile Include="UndergroundGarden.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Laser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Radar.cpp">
+    <ClCompile Include="HMIHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

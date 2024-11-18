@@ -30,9 +30,11 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 #include "DroneSystem.h"
 #include "UndergroundGarden.h"
 #include <iostream>
+#include "HMIHandler.h"
 
-int main()
-{
+
+
+int main() {
 	DroneSystem d(3);
 	std::cout << "Drones amount = " << d.drones.size() << std::endl;
 	std::cout << "Drones status base = " << d.drones[0]->getStatus() << std::endl;
@@ -50,33 +52,45 @@ int main()
 
 	// Create the window and OpenGL context
 
-	InitWindow(1600, 1000, "LairHMI");
+	int screenWidth = 1600;
+	int screenHeight = 1000;
+
+	InitWindow(screenWidth, screenHeight, "LairHMI");
 
 	// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
 	SearchAndSetResourceDir("Screens");
 
-	// Load a texture from the resources directory
+	// Load a texture from the Screens directory
 	Texture background = LoadTexture("MainSelectScreenLairHMI.png");
 
-	// game loop
+	HMIHandler hmiHandler;
+
+	Vector2 mousePoint = { 0.0f, 0.0f };
+
+	SetTargetFPS(60);
+	// HMI loop
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{
+		
+		mousePoint = GetMousePosition();
+		
+		// detects when a menu button is clicked
+		hmiHandler.menuButtonClicked(mousePoint);
+
+		
 		// drawing
 		BeginDrawing();
 
 		// Setup the backbuffer for drawing (clear color and depth buffers)
 		ClearBackground(BLACK);
-
-		// draw some text using the default font
-		//DrawText("Hello Raylib", 200, 200, 20, WHITE);
-
+		
 		// draw our texture to the screen
 		DrawTexture(background, 0, 0, WHITE);
 
 		// end the frame and get ready for the next one  (display frame, poll input, etc...)
 		EndDrawing();
-	}
 
+	}
 	// cleanup
 	// unload our texture so it can be cleaned up
 	UnloadTexture(background);
@@ -84,4 +98,5 @@ int main()
 	// destory the window and cleanup the OpenGL context
 	CloseWindow();
 	return 0;
+
 }
