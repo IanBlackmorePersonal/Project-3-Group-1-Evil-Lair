@@ -267,6 +267,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\resource_dir.h" />
+    <ClInclude Include="Aquarium-Animal.h" />
+    <ClInclude Include="Aquarium-Tank.h" />
     <ClInclude Include="Drone.h" />
     <ClInclude Include="DroneSystem.h" />
     <ClInclude Include="HMIHandler.h" />

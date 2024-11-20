@@ -24,6 +24,12 @@
     <ClInclude Include="HMIHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Aquarium-Tank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Aquarium-Animal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Drone.cpp">
