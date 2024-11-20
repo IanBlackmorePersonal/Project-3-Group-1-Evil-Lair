@@ -12,7 +12,10 @@
     <ClInclude Include="..\..\include\resource_dir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
+    <ClInclude Include="Aquarium-Tank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Aquarium-Animal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
