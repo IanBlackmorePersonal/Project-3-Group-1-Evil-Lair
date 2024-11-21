@@ -31,6 +31,8 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 #include "UndergroundGarden.h"
 #include <iostream>
 #include "HMIHandler.h"
+#include "MonsterContainmentUnit.h"
+#include "ForceField.h"
 
 
 
@@ -46,6 +48,25 @@ int main() {
 	std::cout << "Humidity = " << u.getHumidity() << std::endl;
 	u.setHumidity(70);
 	std::cout << "Humidity after set = " << u.getHumidity() << std::endl;
+
+	MonsterContainmentUnit m;
+	m.monitorVitals();
+	m.updateHungerOverTime(18.2);
+	m.checkHungerLevel();
+	m.feedMonster();
+	m.updateAngerOverTime(200);
+	m.sedateMonster();
+	m.releaseMonster();
+
+	ForceField f;
+	f.isForceFieldActive();
+	f.detectBreach();
+	f.chargeForceField(20);
+	
+
+
+
+
 
 	// Tell the window to use vysnc and work on high DPI displays
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);

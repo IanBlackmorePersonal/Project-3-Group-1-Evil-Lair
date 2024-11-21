@@ -19,7 +19,6 @@ public:
     void releaseMonster();
     void checkAngerLevel();
     void checkHungerLevel();
-    void releaseMonster();
     void updateHungerOverTime(float timeElapsed);
     void updateAngerOverTime(float timeElapsed);
 
