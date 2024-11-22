@@ -15,5 +15,8 @@ void Radar::scanForEntities() {
 
 void Radar::displayEntities() const {
     std::cout << "Detected entities within range: " << detectedEntities << "\n";
-    //Will display number of entities based off of number
+}
+
+int Radar::getDetectedEntities() const {
+    return detectedEntities;
 }

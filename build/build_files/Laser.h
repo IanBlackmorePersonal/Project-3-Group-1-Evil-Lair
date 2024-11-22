@@ -19,4 +19,5 @@ public:
     void setTarget(float latitude, float longitude);
     void activate();
     void fireLaser();
+    int getCharge() const;
 };

@@ -8,4 +8,5 @@ public:
     Radar();
     void scanForEntities();
     void displayEntities() const;
+    int getDetectedEntities() const;
 };

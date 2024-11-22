@@ -17,7 +17,7 @@ void ForceField::detectBreach() {
 
 void ForceField::chargeForceField(float timeElapsed) {
     chargingStatus = true;
-    chargingLevel = max(0.0f, min(chargingLevel - (timeElapsed * 0.5f), 100.0f));
+    chargingLevel = max(0.0f, min(chargingLevel + (timeElapsed * 0.5f), 100.0f));
     cout << "Charging force field. Charge level: " << chargingLevel << "%" << endl;
     if (chargingLevel >= 100) {
         chargingStatus = false;
