@@ -30,9 +30,17 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 #include "DroneSystem.h"
 #include "UndergroundGarden.h"
 #include <iostream>
-#include "HMIHandler.h"
+#include "HMIHandler.
 #include "MonsterContainmentUnit.h"
 #include "ForceField.h"
+
+=======
+#define DRONE_SCREEN 1
+#define UDG_SCREEN 2
+#define AQUARIUM_SCREEN 3
+#define FACILITY_SCREEN 4
+#define LASER_SCREEN 5
+#define MONSTER_SCREEN 6
 
 
 
@@ -42,7 +50,7 @@ int main() {
 	std::cout << "Drones status base = " << d.drones[0]->getStatus() << std::endl;
 	d.deployDrones();
 	std::cout << "Drones status deployed = " << d.drones[0]->getStatus() << std::endl;
-
+	d.drones[2]->setBatteryLevel(70.2f);
 
 	UndergroundGarden u;
 	std::cout << "Humidity = " << u.getHumidity() << std::endl;
@@ -82,31 +90,93 @@ int main() {
 	SearchAndSetResourceDir("Screens");
 
 	// Load a texture from the Screens directory
-	Texture background = LoadTexture("MainSelectScreenLairHMI.png");
+	Texture mainbackground = LoadTexture("MainSelectScreenLairHMI.png");
+	Texture background = mainbackground;
+	Texture droneBackground = LoadTexture("droneSystemBackground.png");
+	Texture UDGBackground = LoadTexture("UndergroundGardenBackground.png");
+	// the rest are currently not created
+	Texture facilityBackground = LoadTexture("UndergroundGardenBackground.png");
+	Texture monsterBackground = LoadTexture("UndergroundGardenBackground.png");
+	Texture laserBackground = LoadTexture("UndergroundGardenBackground.png");
+	Texture aquariumBackground = LoadTexture("UndergroundGardenBackground.png");
 
 	HMIHandler hmiHandler;
 
 	Vector2 mousePoint = { 0.0f, 0.0f };
 
 	SetTargetFPS(60);
+
+
+	// drawing
+	BeginDrawing();
+
+	// Setup the backbuffer for drawing (clear color and depth buffers)
+	ClearBackground(BLACK);
+
+	// draw our texture to the screen
+	DrawTexture(background, 0, 0, WHITE);
+
+	// end the frame and get ready for the next one  (display frame, poll input, etc...)
+	EndDrawing();
 	// HMI loop
+	int currentScreen = 0;
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{
-		
-		mousePoint = GetMousePosition();
-		
-		// detects when a menu button is clicked
-		hmiHandler.menuButtonClicked(mousePoint);
 
+		mousePoint = GetMousePosition();
 		
 		// drawing
 		BeginDrawing();
 
 		// Setup the backbuffer for drawing (clear color and depth buffers)
 		ClearBackground(BLACK);
-		
+
 		// draw our texture to the screen
 		DrawTexture(background, 0, 0, WHITE);
+		// detects when a menu button is clicked
+		if (currentScreen == 0) {
+			currentScreen = hmiHandler.menuButtonClicked(mousePoint);
+
+			switch (currentScreen) {
+			case DRONE_SCREEN:
+				background = droneBackground;
+				break;
+			case UDG_SCREEN:
+				background = UDGBackground;
+				break;
+			case AQUARIUM_SCREEN:
+				background = aquariumBackground;
+				break;
+			case FACILITY_SCREEN:
+				background = facilityBackground;
+				break;
+			case LASER_SCREEN:
+				background = laserBackground;
+				break;
+			case MONSTER_SCREEN:
+				background = monsterBackground;
+				break;
+				//intentional. do not want it to do anything on default
+			default:
+				break;
+			}
+		}
+		else {
+			bool menuButtonPressed = hmiHandler.returnToMenuButtonClicked(mousePoint);
+			if (menuButtonPressed) {
+				background = mainbackground;
+				currentScreen = 0;
+			}
+		}
+		if (currentScreen == DRONE_SCREEN) {
+			hmiHandler.inDroneMenu(mousePoint, d);
+		}
+		if (currentScreen == UDG_SCREEN) {
+			hmiHandler.inUDGMenu(mousePoint, u);
+		}
+			
+		
+		
 
 		// end the frame and get ready for the next one  (display frame, poll input, etc...)
 		EndDrawing();
@@ -114,7 +184,13 @@ int main() {
 	}
 	// cleanup
 	// unload our texture so it can be cleaned up
-	UnloadTexture(background);
+	UnloadTexture(mainbackground);
+	UnloadTexture(UDGBackground);
+	UnloadTexture(droneBackground);
+	UnloadTexture(monsterBackground);
+	UnloadTexture(laserBackground);
+	UnloadTexture(aquariumBackground);
+	UnloadTexture(facilityBackground);
 
 	// destory the window and cleanup the OpenGL context
 	CloseWindow();

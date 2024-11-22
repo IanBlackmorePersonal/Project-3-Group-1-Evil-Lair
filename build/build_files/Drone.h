@@ -21,11 +21,12 @@ public:
 	Drone();
 	~Drone();
 	void repairDrone();
-	DamageState getDamage();
-	DroneStatus getStatus();
+	char* getDamage();
+	char* getStatus();
 	void deployDrone();
 	void recallDrone();
 	float getBatteryLevel();
+	void setBatteryLevel(float f);
 	void chargeDrone();
 
 };
