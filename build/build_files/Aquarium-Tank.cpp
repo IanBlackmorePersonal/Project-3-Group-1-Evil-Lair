@@ -11,6 +11,16 @@ Tank::Tank()
 	strcpy(TankName, "TankDefault\n");
 }
 
+void Tank::setTankName(char* name)
+{
+	strncpy(this->TankName, name, TANKNAMELEN);
+}
+
+char* Tank::getTankName()
+{
+	return TankName;
+}
+
 void Tank::setPopulation(int pop)
 {
 	this->population = pop;

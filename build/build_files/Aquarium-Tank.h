@@ -15,6 +15,8 @@ class Tank {
 
 public:
 	Tank();
+	void setTankName(char* name);
+	char* getTankName();
 	void setPopulation(int pop);
 	int getPopulation();
 	void setAnimal(Animal animal);
