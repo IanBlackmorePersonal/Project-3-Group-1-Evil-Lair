@@ -74,6 +74,7 @@ void Tank::alterTemperature(double alteration) {
 }
 
 void Tank::calculateWaterQuality() {
+	//this is wrong 100%
 	double calculatedVal = 0.0;
 	calculatedVal += abs(pH - 7)*50;
 	calculatedVal += abs(oxygenation - 90) * 50;
@@ -82,13 +83,23 @@ void Tank::calculateWaterQuality() {
 
 int Tank::checkValues() {
 	if (abs(pH - 7) >= 1) {
-		printf("pH Alert! Out of Acceptable Range!!!");
+		printf("pH Alert! Out of Acceptable Range!!!\n");
 		return 1;
 	}
 	else if (abs(temperature - 25.8) >= 0.7) {
-		printf("Temperature Alert! Temperature out of acceptable range!");
+		printf("Temperature Alert! Temperature out of acceptable range!\n");
 		return 2;
 	}
+	else if (abs(oxygenation - 90) >= 10) {
+		printf("Oxygenation Alert! Oxygentation out of acceptable range!\n");
+		return 3;
+	}
+	else if (waterQuality <= 70) {
+		printf("Warning: Water Quality Dipping below acceptable levels!\n");
+		return 4;
+	}
+	else
+		return 0;
 }
 
 void Tank::emptyTank() {
