@@ -30,13 +30,18 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 #include "DroneSystem.h"
 #include "UndergroundGarden.h"
 #include <iostream>
-#include "HMIHandler.h"
+#include "HMIHandler.
+#include "MonsterContainmentUnit.h"
+#include "ForceField.h"
+
+=======
 #define DRONE_SCREEN 1
 #define UDG_SCREEN 2
 #define AQUARIUM_SCREEN 3
 #define FACILITY_SCREEN 4
 #define LASER_SCREEN 5
 #define MONSTER_SCREEN 6
+
 
 
 int main() {
@@ -51,6 +56,25 @@ int main() {
 	std::cout << "Humidity = " << u.getHumidity() << std::endl;
 	u.setHumidity(70);
 	std::cout << "Humidity after set = " << u.getHumidity() << std::endl;
+
+	MonsterContainmentUnit m;
+	m.monitorVitals();
+	m.updateHungerOverTime(18.2);
+	m.checkHungerLevel();
+	m.feedMonster();
+	m.updateAngerOverTime(200);
+	m.sedateMonster();
+	m.releaseMonster();
+
+	ForceField f;
+	f.isForceFieldActive();
+	f.detectBreach();
+	f.chargeForceField(20);
+	
+
+
+
+
 
 	// Tell the window to use vysnc and work on high DPI displays
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);

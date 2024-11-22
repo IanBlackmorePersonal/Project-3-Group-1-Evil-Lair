@@ -68,8 +68,9 @@ void MonsterContainmentUnit::updateHungerOverTime(float timeElapsed) {
 
 void MonsterContainmentUnit::updateAngerOverTime(float timeElapsed) {
     angerLevel = max(0.0f, min(angerLevel + (timeElapsed * 0.2f), 100.0f));
-    checkAngerLevel();
     cout << "Updated anger level based on time: " << angerLevel << "%" << endl;
+    checkAngerLevel();
+    
 }
 
 int MonsterContainmentUnit::getHungerLevel() {
