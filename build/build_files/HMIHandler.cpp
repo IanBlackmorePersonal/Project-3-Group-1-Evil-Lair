@@ -215,8 +215,6 @@ void HMIHandler::drawUDG(UndergroundGarden& u) {
 void HMIHandler::inUDGMenu(Vector2 mousePoint, UndergroundGarden &u) {
 
 	drawUDG(u);
-	std::cout << "mouse x = " << mousePoint.x << std::endl;
-	std::cout << "mouse y = " << mousePoint.y << std::endl;
 	if (mousePoint.x > UDG_UP_ARROWS_X && mousePoint.x < UDG_UP_ARROWS_X + UDG_ARROW_WIDTH) {
 		if (mousePoint.y > UDG_HUMIDITY_ARROWS_Y && mousePoint.y < UDG_HUMIDITY_ARROWS_Y + UDG_ARROW_HEIGHT) {
 			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
