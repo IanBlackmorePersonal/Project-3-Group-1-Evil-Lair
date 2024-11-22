@@ -14,6 +14,9 @@ public:
 	int getY1();
 	int getY2();
 
+	int getPOEID();
+	void setPOEID(int POEID);
+
 	int getDamageLevel();
 	void setDamageLevel(int damageLvl);
 
@@ -25,6 +28,5 @@ public:
 
 	bool getIsOpen();
 	void setIsOpen(bool isOpen);
-
 
 };

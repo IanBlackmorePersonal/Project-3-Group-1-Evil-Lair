@@ -11,6 +11,8 @@ class Facility {
 	bool isLockdown;
 
 public:
+	Facility();
+
 	int engageLockdown();
 
 	void checkSensors();
