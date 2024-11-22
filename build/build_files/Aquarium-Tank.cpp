@@ -1,6 +1,16 @@
 #include "Aquarium-Tank.h"
 #include <math.h>
 
+Tank::Tank()
+{
+	pH = 7;
+	temperature = 25.8;
+	oxygenation = 90;
+	waterQuality = 100;
+	population = 5;
+	strcpy(TankName, "TankDefault\n");
+}
+
 void Tank::setPopulation(int pop)
 {
 	this->population = pop;

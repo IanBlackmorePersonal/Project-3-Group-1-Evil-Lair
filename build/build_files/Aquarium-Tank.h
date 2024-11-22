@@ -4,13 +4,17 @@
 #include <math.h>
 #include <stdio.h>
 
+#define TANKNAMELEN 20
+
 class Tank {
+	char TankName[TANKNAMELEN];
 	int population;
 	Animal tankAnimal;
 	double waterQuality, pH, oxygenation, temperature;
 
 
 public:
+	Tank();
 	void setPopulation(int pop);
 	int getPopulation();
 	void setAnimal(Animal animal);
