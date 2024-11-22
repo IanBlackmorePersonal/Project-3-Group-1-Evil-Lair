@@ -10,16 +10,44 @@ Drone::Drone() {
 	droneStatus = UNDEPLOYED;
 }
 void Drone::chargeDrone() {
-	droneBattery = 100;
+	droneBattery = (float)100;
 }
 void Drone::repairDrone() {
 	droneDamage = UNDAMAGED;
 }
-DamageState Drone::getDamage() {
-	return droneDamage;
+char* Drone::getDamage() {
+	switch (droneDamage) {
+	case UNDAMAGED:
+		return "Undamaged";
+		break;
+	case DAMAGED:
+		return "Damaged";
+		break;
+	case BROKEN:
+		return "Broken";
+		break;
+	}
+	return "";
 }
-DroneStatus Drone::getStatus() {
-	return droneStatus;
+char* Drone::getStatus() {
+	switch (droneStatus) {
+	case CHARGING:
+		return "Charging";
+		break;
+	case DEPLOYED:
+		return "Deployed";
+		break;
+	case REPAIRING:
+		return "Repairing";
+		break;
+	case UNDEPLOYED:
+		return "Undeployed";
+		break;
+	default:
+		return "";
+		break;
+	}
+	return "";
 }
 void Drone::deployDrone() {
 	droneStatus = DEPLOYED;
@@ -29,4 +57,8 @@ void Drone::recallDrone() {
 }
 float Drone::getBatteryLevel() {
 	return droneBattery;
+}
+
+void Drone::setBatteryLevel(float f) {
+	droneBattery = f;
 }
