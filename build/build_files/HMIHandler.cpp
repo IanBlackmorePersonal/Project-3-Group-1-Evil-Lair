@@ -29,7 +29,7 @@ int HMIHandler::menuButtonClicked(Vector2 mousePoint) {
 	if (mousePoint.x > DRONE_SYSTEM_BUTTON_X && mousePoint.x < DRONE_SYSTEM_BUTTON_X + BUTTON_WIDTH) {
 		if (mousePoint.y > DRONE_SYSTEM_BUTTON_Y && mousePoint.y < DRONE_SYSTEM_BUTTON_Y + BUTTON_HEIGHT) {
 			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-				std::cout << "clicked drone system button" << std::endl;				
+				std::cout << "clicked drone system button" << std::endl;
 				return 1;
 			}
 		}
@@ -74,7 +74,7 @@ int HMIHandler::menuButtonClicked(Vector2 mousePoint) {
 			}
 		}
 	}
-	
+
 
 	return 0;
 }
@@ -111,7 +111,7 @@ bool HMIHandler::returnToMenuButtonClicked(Vector2 mousePoint) {
 #define CHARGE_BUTTON_3_X 1348
 #define CHARGE_BUTTON_Y 458
 
-void HMIHandler::drawDrones(DroneSystem &d) {
+void HMIHandler::drawDrones(DroneSystem& d) {
 	DrawText(TextFormat("Battery: %.1f%%", d.drones[0]->getBatteryLevel()), 80, 210, 40, BLACK);
 	DrawText(TextFormat("Battery: %.1f%%", d.drones[1]->getBatteryLevel()), 575, 210, 40, BLACK);
 	DrawText(TextFormat("Battery: %.1f%%", d.drones[2]->getBatteryLevel()), 1085, 210, 40, BLACK);
@@ -125,8 +125,8 @@ void HMIHandler::drawDrones(DroneSystem &d) {
 	DrawText(TextFormat("Damage: %s", d.drones[2]->getDamage()), 1085, 400, 40, BLACK);
 }
 
-void HMIHandler::inDroneMenu(Vector2 mousePoint, DroneSystem &d) {
-	
+void HMIHandler::inDroneMenu(Vector2 mousePoint, DroneSystem& d) {
+
 	drawDrones(d);
 
 	if (mousePoint.x > RECALL_BUTTON_X && mousePoint.x < RECALL_BUTTON_X + LARGE_BUTTON_WIDTH) {
@@ -198,7 +198,7 @@ void HMIHandler::drawUDG(UndergroundGarden& u) {
 	else {
 		DrawText("Sprinklers: Off", 170, 800, 100, BLACK);
 	}
-	
+
 }
 
 #define UDG_UP_ARROWS_X 1000
@@ -212,7 +212,7 @@ void HMIHandler::drawUDG(UndergroundGarden& u) {
 #define UDG_CIRCLE_BUTTON_DIAMETER 240
 
 
-void HMIHandler::inUDGMenu(Vector2 mousePoint, UndergroundGarden &u) {
+void HMIHandler::inUDGMenu(Vector2 mousePoint, UndergroundGarden& u) {
 
 	drawUDG(u);
 	if (mousePoint.x > UDG_UP_ARROWS_X && mousePoint.x < UDG_UP_ARROWS_X + UDG_ARROW_WIDTH) {
@@ -250,6 +250,155 @@ void HMIHandler::inUDGMenu(Vector2 mousePoint, UndergroundGarden &u) {
 			}
 		}
 	}
-	
-	
+
+
+}
+
+// Define constants for button and input field positions
+#define BUTTON_WIDTH 300
+#define BUTTON_HEIGHT 60
+
+// Laser Section Positions
+#define LASER_CHARGE_BUTTON_X 100
+#define LASER_CHARGE_BUTTON_Y 200
+#define LASER_FIRE_BUTTON_X 100
+#define LASER_FIRE_BUTTON_Y 300
+
+// Target Input Box Positions
+#define TARGET_LAT_BOX_X 100
+#define TARGET_LAT_BOX_Y 400
+#define TARGET_LON_BOX_X 400
+#define TARGET_LON_BOX_Y 400
+#define TARGET_BOX_WIDTH 200
+#define TARGET_BOX_HEIGHT 50
+
+// Radar Section Positions
+#define RADAR_SCAN_BUTTON_X 800
+#define RADAR_SCAN_BUTTON_Y 200
+
+void HMIHandler::drawLaserAndRadar(BigLaser& laser, Radar& radar) {
+	// Drawing the Laser Section
+	DrawText("Laser System", 100, 50, 40, WHITE);  // Title for Laser System
+	DrawText(TextFormat("Charge: %d%%", laser.getCharge()), 100, 120, 30, WHITE);  // Display current charge
+
+	// Laser Buttons (Charge and Fire)
+	DrawRectangle(LASER_CHARGE_BUTTON_X, LASER_CHARGE_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT, DARKGRAY);
+	DrawText("Charge Laser", LASER_CHARGE_BUTTON_X + 20, LASER_CHARGE_BUTTON_Y + 30, 30, WHITE);
+
+	DrawRectangle(LASER_FIRE_BUTTON_X, LASER_FIRE_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT, DARKGRAY);
+	DrawText("Fire Laser", LASER_FIRE_BUTTON_X + 20, LASER_FIRE_BUTTON_Y + 30, 30, WHITE);
+
+	// Latitude and Longitude Input Fields
+	DrawText("Target Latitude:", TARGET_LAT_BOX_X, TARGET_LAT_BOX_Y - 40, 20, WHITE);
+	DrawText("Target Longitude:", TARGET_LON_BOX_X, TARGET_LON_BOX_Y - 40, 20, WHITE);
+
+	// Latitude and Longitude Textboxes
+	Rectangle latBox = { TARGET_LAT_BOX_X, TARGET_LAT_BOX_Y, TARGET_BOX_WIDTH, TARGET_BOX_HEIGHT };
+	Rectangle lonBox = { TARGET_LON_BOX_X, TARGET_LON_BOX_Y, TARGET_BOX_WIDTH, TARGET_BOX_HEIGHT };
+
+	DrawRectangleRec(latBox, isLatBoxActive ? LIGHTGRAY : DARKGRAY);
+	DrawRectangleRec(lonBox, isLonBoxActive ? LIGHTGRAY : DARKGRAY);
+
+	// Display text input
+	DrawText(latitudeInput, TARGET_LAT_BOX_X + 10, TARGET_LAT_BOX_Y + 10, 20, BLACK);
+	DrawText(longitudeInput, TARGET_LON_BOX_X + 10, TARGET_LON_BOX_Y + 10, 20, BLACK);
+
+	// Drawing the Radar Section (below the laser)
+	DrawText("Radar System", 800, 50, 40, WHITE);  // Title for Radar System
+	DrawText(TextFormat("Entities Detected: %d", radar.getDetectedEntities()), 800, 120, 30, WHITE);  // Display detected entities count
+
+	// Radar Button (Scan)
+	DrawRectangle(RADAR_SCAN_BUTTON_X, RADAR_SCAN_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT, DARKGRAY);
+	DrawText("Scan Radar", RADAR_SCAN_BUTTON_X + 20, RADAR_SCAN_BUTTON_Y + 30, 30, WHITE);
+}
+
+void HMIHandler::handleLaserTargetInput(BigLaser& laser) {
+	// Define the rectangles for the text input boxes
+	Rectangle latBox = { TARGET_LAT_BOX_X, TARGET_LAT_BOX_Y, TARGET_BOX_WIDTH, TARGET_BOX_HEIGHT };
+	Rectangle lonBox = { TARGET_LON_BOX_X, TARGET_LON_BOX_Y, TARGET_BOX_WIDTH, TARGET_BOX_HEIGHT };
+
+	// Detect mouse click to activate text box for latitude and longitude
+	if (CheckCollisionPointRec(GetMousePosition(), latBox)) {
+		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+			isLatBoxActive = true;
+			isLonBoxActive = false;
+		}
+	}
+	if (CheckCollisionPointRec(GetMousePosition(), lonBox)) {
+		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+			isLonBoxActive = true;
+			isLatBoxActive = false;
+		}
+	}
+
+	// Handle text input for latitude and longitude
+	if (isLatBoxActive) {
+		int key = GetCharPressed();
+		while (key > 0) {
+			if (key >= 32 && key <= 125 && strlen(latitudeInput) < sizeof(latitudeInput) - 1) {
+				int len = strlen(latitudeInput);
+				latitudeInput[len] = (char)key;
+				latitudeInput[len + 1] = '\0';
+			}
+			key = GetCharPressed();
+		}
+
+		if (IsKeyPressed(KEY_BACKSPACE) && strlen(latitudeInput) > 0) {
+			latitudeInput[strlen(latitudeInput) - 1] = '\0';
+		}
+	}
+
+	if (isLonBoxActive) {
+		int key = GetCharPressed();
+		while (key > 0) {
+			if (key >= 32 && key <= 125 && strlen(longitudeInput) < sizeof(longitudeInput) - 1) {
+				int len = strlen(longitudeInput);
+				longitudeInput[len] = (char)key;
+				longitudeInput[len + 1] = '\0';
+			}
+			key = GetCharPressed();
+		}
+
+		if (IsKeyPressed(KEY_BACKSPACE) && strlen(longitudeInput) > 0) {
+			longitudeInput[strlen(longitudeInput) - 1] = '\0';
+		}
+	}
+
+	// Update laser target when Enter is pressed
+	if (IsKeyPressed(KEY_ENTER)) {
+		float latitude = atof(latitudeInput);
+		float longitude = atof(longitudeInput);
+		laser.setTarget(latitude, longitude);
+		std::cout << "Target set to Latitude: " << latitude << ", Longitude: " << longitude << "\n";
+	}
+}
+
+void HMIHandler::inLaserAndRadarMenu(Vector2 mousePoint, BigLaser& laser, Radar& radar) {
+	drawLaserAndRadar(laser, radar);
+
+	// Handle laser target input
+	handleLaserTargetInput(laser);
+
+	// Laser control buttons (Charge and Fire)
+	if (mousePoint.x > LASER_CHARGE_BUTTON_X && mousePoint.x < LASER_CHARGE_BUTTON_X + BUTTON_WIDTH &&
+		mousePoint.y > LASER_CHARGE_BUTTON_Y && mousePoint.y < LASER_CHARGE_BUTTON_Y + BUTTON_HEIGHT) {
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+			laser.charge(20);  // Charge in increments of 20%
+		}
+	}
+
+	if (mousePoint.x > LASER_FIRE_BUTTON_X && mousePoint.x < LASER_FIRE_BUTTON_X + BUTTON_WIDTH &&
+		mousePoint.y > LASER_FIRE_BUTTON_Y && mousePoint.y < LASER_FIRE_BUTTON_Y + BUTTON_HEIGHT) {
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+			laser.fireLaser();
+		}
+	}
+
+	// Radar control button (Scan)
+	if (mousePoint.x > RADAR_SCAN_BUTTON_X && mousePoint.x < RADAR_SCAN_BUTTON_X + BUTTON_WIDTH &&
+		mousePoint.y > RADAR_SCAN_BUTTON_Y && mousePoint.y < RADAR_SCAN_BUTTON_Y + BUTTON_HEIGHT) {
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+			radar.scanForEntities();
+		}
+	}
 }

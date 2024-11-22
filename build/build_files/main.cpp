@@ -30,11 +30,11 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 #include "DroneSystem.h"
 #include "UndergroundGarden.h"
 #include <iostream>
-#include "HMIHandler.
+#include "HMIHandler.h"
 #include "MonsterContainmentUnit.h"
 #include "ForceField.h"
 
-=======
+
 #define DRONE_SCREEN 1
 #define UDG_SCREEN 2
 #define AQUARIUM_SCREEN 3
@@ -56,6 +56,9 @@ int main() {
 	std::cout << "Humidity = " << u.getHumidity() << std::endl;
 	u.setHumidity(70);
 	std::cout << "Humidity after set = " << u.getHumidity() << std::endl;
+
+	BigLaser laser;   // Creates an instance of BigLaser
+	Radar radar;      // Creates an instance of Radar
 
 	MonsterContainmentUnit m;
 	m.monitorVitals();
@@ -97,7 +100,7 @@ int main() {
 	// the rest are currently not created
 	Texture facilityBackground = LoadTexture("UndergroundGardenBackground.png");
 	Texture monsterBackground = LoadTexture("UndergroundGardenBackground.png");
-	Texture laserBackground = LoadTexture("UndergroundGardenBackground.png");
+	Texture laserBackground = LoadTexture("");
 	Texture aquariumBackground = LoadTexture("UndergroundGardenBackground.png");
 
 	HMIHandler hmiHandler;
@@ -173,6 +176,9 @@ int main() {
 		}
 		if (currentScreen == UDG_SCREEN) {
 			hmiHandler.inUDGMenu(mousePoint, u);
+		}
+		if (currentScreen == LASER_SCREEN) {
+			hmiHandler.inLaserAndRadarMenu(mousePoint, laser, radar);
 		}
 			
 		
