@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Aquarium-Animal.h"
+#include <math.h>
+#include <stdio.h>
 
 class Tank {
 	int population;
@@ -19,4 +21,17 @@ public:
 	double getpH();
 	void setOxygenation(double oxygenation);
 	double getOxygenation();
+	void setTemperature(double temperature);
+	double getTemperature();
+
+	void alterPop(int alteration);
+	void alterPH(double alteration);
+	void alterOxygenation(double alteration);
+	void alterTemperature(double alteration);
+
+	void calculateWaterQuality();
+
+	int checkValues();
+
+	void emptyTank();
 };
