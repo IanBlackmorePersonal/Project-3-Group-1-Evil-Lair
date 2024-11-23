@@ -45,17 +45,9 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 
 
 int main() {
-	DroneSystem d(3);
-	std::cout << "Drones amount = " << d.drones.size() << std::endl;
-	std::cout << "Drones status base = " << d.drones[0]->getStatus() << std::endl;
-	d.deployDrones();
-	std::cout << "Drones status deployed = " << d.drones[0]->getStatus() << std::endl;
-	d.drones[2]->setBatteryLevel(70.2f);
-
+	SearchAndSetResourceDir("Screens");
+	DroneSystem d;
 	UndergroundGarden u;
-	std::cout << "Humidity = " << u.getHumidity() << std::endl;
-	u.setHumidity(70);
-	std::cout << "Humidity after set = " << u.getHumidity() << std::endl;
 
 	BigLaser laser;   // Creates an instance of BigLaser
 	Radar radar;      // Creates an instance of Radar
@@ -75,10 +67,6 @@ int main() {
 	f.chargeForceField(20);
 	
 
-
-
-
-
 	// Tell the window to use vysnc and work on high DPI displays
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
 
@@ -90,7 +78,7 @@ int main() {
 	InitWindow(screenWidth, screenHeight, "LairHMI");
 
 	// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
-	SearchAndSetResourceDir("Screens");
+	
 
 	// Load a texture from the Screens directory
 	Texture mainbackground = LoadTexture("MainSelectScreenLairHMI.png");
@@ -109,18 +97,6 @@ int main() {
 
 	SetTargetFPS(60);
 
-
-	// drawing
-	BeginDrawing();
-
-	// Setup the backbuffer for drawing (clear color and depth buffers)
-	ClearBackground(BLACK);
-
-	// draw our texture to the screen
-	DrawTexture(background, 0, 0, WHITE);
-
-	// end the frame and get ready for the next one  (display frame, poll input, etc...)
-	EndDrawing();
 	// HMI loop
 	int currentScreen = 0;
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
