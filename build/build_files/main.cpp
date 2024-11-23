@@ -43,11 +43,15 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 #define MONSTER_SCREEN 6
 
 
+#define DRONE_SYSTEM_FILEPATH "dronesystem.txt"
+#define UDG_SYSTEM_FILEPATH "undergroundgarden.txt"
 
 int main() {
 	SearchAndSetResourceDir("Screens");
 	DroneSystem d;
+	d.readDataFromFile(DRONE_SYSTEM_FILEPATH);
 	UndergroundGarden u;
+	u.readDataFromFile(UDG_SYSTEM_FILEPATH);
 
 	BigLaser laser;   // Creates an instance of BigLaser
 	Radar radar;      // Creates an instance of Radar

@@ -10,7 +10,6 @@ DroneSystem::DroneSystem() {
 		Drone* ptr = new Drone;
 		drones.push_back(ptr);
 	}
-	readDataFromFile(DRONE_SYSTEM_FILEPATH);
 
 }
 DroneSystem::DroneSystem(int amount) {
@@ -43,7 +42,7 @@ void DroneSystem::recallDrones() {
 bool DroneSystem::readDataFromFile(char* filepath) {
 	FILE* fp = fopen(filepath, "r");
 	char buffer [MAX_CHAR_SIZE];
-	if (!fp) {
+	if (fp == NULL) {
 		std::cout << "Could not open file: " << filepath << std::endl;
 		return false;
 	}
