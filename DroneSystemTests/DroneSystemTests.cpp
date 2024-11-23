@@ -14,7 +14,7 @@ namespace DroneSystemTests
 		TEST_METHOD(DSS_103)
 		{
 			// verify drone system is created in a safe empty state
-			DroneSystem d(3);
+			DroneSystem d;
 			Assert::AreEqual(d.drones[0]->getBatteryLevel(), 100.0f);
 			Assert::AreEqual(d.drones[0]->getDamage(), "Undamaged");
 			Assert::AreEqual(d.drones[0]->getStatus(), "Undeployed");

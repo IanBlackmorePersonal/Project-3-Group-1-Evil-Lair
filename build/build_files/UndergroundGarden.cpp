@@ -4,10 +4,8 @@
 #include <string>
 #define MAX_CHAR_SIZE 20
 #define UDG_SYSTEM_FILEPATH "undergroundgarden.txt"
+
 UndergroundGarden::UndergroundGarden() {
-	if (readDataFromFile(UDG_SYSTEM_FILEPATH)) {
-		return;
-	}
 	// default values
 	sprinklerStatus = false;
 	soilPHLevel = 7.0F;
