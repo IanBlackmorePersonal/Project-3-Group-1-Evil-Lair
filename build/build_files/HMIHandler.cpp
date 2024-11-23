@@ -100,7 +100,7 @@ bool HMIHandler::returnToMenuButtonClicked(Vector2 mousePoint) {
 #define LARGE_BUTTON_HEIGHT 100
 
 #define REPAIR_BUTTON_1_X 72
-#define REPAIR_BUTTON_2_X 459
+#define REPAIR_BUTTON_2_X 559
 #define REPAIR_BUTTON_3_X 1084
 #define REPAIR_BUTTON_Y 458
 #define DRONE_SMALL_BUTTON_WIDTH 200
@@ -116,17 +116,17 @@ void HMIHandler::drawDrones(DroneSystem& d) {
 	DrawText(TextFormat("Battery: %.1f%%", d.drones[1]->getBatteryLevel()), 575, 210, 40, BLACK);
 	DrawText(TextFormat("Battery: %.1f%%", d.drones[2]->getBatteryLevel()), 1085, 210, 40, BLACK);
 
-	DrawText(TextFormat("Status: %s", d.drones[2]->getStatus()), 80, 330, 40, BLACK);
-	DrawText(TextFormat("Status: %s", d.drones[2]->getStatus()), 575, 330, 40, BLACK);
+	DrawText(TextFormat("Status: %s", d.drones[0]->getStatus()), 80, 330, 40, BLACK);
+	DrawText(TextFormat("Status: %s", d.drones[1]->getStatus()), 575, 330, 40, BLACK);
 	DrawText(TextFormat("Status: %s", d.drones[2]->getStatus()), 1085, 330, 40, BLACK);
 
-	DrawText(TextFormat("Damage: %s", d.drones[2]->getDamage()), 80, 400, 40, BLACK);
-	DrawText(TextFormat("Damage: %s", d.drones[2]->getDamage()), 575, 400, 40, BLACK);
+	DrawText(TextFormat("Damage: %s", d.drones[0]->getDamage()), 80, 400, 40, BLACK);
+	DrawText(TextFormat("Damage: %s", d.drones[1]->getDamage()), 575, 400, 40, BLACK);
 	DrawText(TextFormat("Damage: %s", d.drones[2]->getDamage()), 1085, 400, 40, BLACK);
 }
 
 void HMIHandler::inDroneMenu(Vector2 mousePoint, DroneSystem& d) {
-
+	
 	drawDrones(d);
 
 	if (mousePoint.x > RECALL_BUTTON_X && mousePoint.x < RECALL_BUTTON_X + LARGE_BUTTON_WIDTH) {

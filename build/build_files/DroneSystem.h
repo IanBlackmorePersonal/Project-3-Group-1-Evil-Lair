@@ -1,6 +1,7 @@
 #pragma once
 #include "Drone.h"
 #include <vector>
+#include <iostream>
 class DroneSystem {
 public:
 	std::vector <Drone*> drones;
@@ -10,4 +11,6 @@ public:
 	~DroneSystem();
 	void deployDrones();
 	void recallDrones();
+	bool readDataFromFile(char* filepath);
+	void writeDataToFile(char* filepath);
 };

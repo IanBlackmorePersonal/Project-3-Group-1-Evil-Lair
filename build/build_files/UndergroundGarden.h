@@ -13,4 +13,6 @@ public:
 	bool getSprinklerStatus();
 	float getHumidity();
 	float getSoilPH();
+	bool readDataFromFile(char* filepath);
+	void writeDataToFile(char* filepath);
 };

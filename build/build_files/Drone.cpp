@@ -1,5 +1,5 @@
 #include "Drone.h"
-
+#include <iostream>
 Drone::~Drone()	{
 
 }
@@ -11,8 +11,10 @@ Drone::Drone() {
 }
 void Drone::chargeDrone() {
 	droneBattery = (float)100;
+	setStatus(CHARGING);
 }
 void Drone::repairDrone() {
+	setStatus(REPAIRING);
 	droneDamage = UNDAMAGED;
 }
 char* Drone::getDamage() {
@@ -61,4 +63,12 @@ float Drone::getBatteryLevel() {
 
 void Drone::setBatteryLevel(float f) {
 	droneBattery = f;
+}
+
+void Drone::setStatus(DroneStatus d) {
+	droneStatus = d;
+}
+
+void Drone::setDamage(DamageState d) {
+	droneDamage = d;
 }

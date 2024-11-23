@@ -27,6 +27,8 @@ public:
 	void recallDrone();
 	float getBatteryLevel();
 	void setBatteryLevel(float f);
+	void setStatus(DroneStatus d);
+	void setDamage(DamageState d);
 	void chargeDrone();
 
 };
