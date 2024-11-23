@@ -1,23 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "raylib-quickstart-main", "build\build_files\raylib-quickstart-main.vcxproj", "{7223710C-5E1D-9A5E-478A-306F332300CB}"
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "projectmain", "build\build_files\raylib-quickstart-main.vcxproj", "{7223710C-5E1D-9A5E-478A-306F332300CB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8898EA18-743A-15EF-5DF5-284349369C3F} = {8898EA18-743A-15EF-5DF5-284349369C3F}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "raylib", "build\build_files\raylib.vcxproj", "{8898EA18-743A-15EF-5DF5-284349369C3F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DroneSystemTests", "DroneSystemTests\DroneSystemTests.vcxproj", "{408280E0-DF25-4C45-BFEF-9DB1B7382123}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UDGTesting", "UDGTesting\UDGTesting.vcxproj", "{863473DF-0FB4-4A2D-8960-8C424D046923}"
+EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Release|x64 = Release|x64
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
 		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
 		Release|ARM64 = Release|ARM64
 		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7223710C-5E1D-9A5E-478A-306F332300CB}.Debug|ARM64.ActiveCfg = Debug|ARM64
@@ -44,6 +48,30 @@ Global
 		{8898EA18-743A-15EF-5DF5-284349369C3F}.Release|Win32.Build.0 = Release|Win32
 		{8898EA18-743A-15EF-5DF5-284349369C3F}.Release|x64.ActiveCfg = Release|x64
 		{8898EA18-743A-15EF-5DF5-284349369C3F}.Release|x64.Build.0 = Release|x64
+		{408280E0-DF25-4C45-BFEF-9DB1B7382123}.Debug|ARM64.ActiveCfg = Debug|x64
+		{408280E0-DF25-4C45-BFEF-9DB1B7382123}.Debug|ARM64.Build.0 = Debug|x64
+		{408280E0-DF25-4C45-BFEF-9DB1B7382123}.Debug|Win32.ActiveCfg = Debug|Win32
+		{408280E0-DF25-4C45-BFEF-9DB1B7382123}.Debug|Win32.Build.0 = Debug|Win32
+		{408280E0-DF25-4C45-BFEF-9DB1B7382123}.Debug|x64.ActiveCfg = Debug|x64
+		{408280E0-DF25-4C45-BFEF-9DB1B7382123}.Debug|x64.Build.0 = Debug|x64
+		{408280E0-DF25-4C45-BFEF-9DB1B7382123}.Release|ARM64.ActiveCfg = Release|x64
+		{408280E0-DF25-4C45-BFEF-9DB1B7382123}.Release|ARM64.Build.0 = Release|x64
+		{408280E0-DF25-4C45-BFEF-9DB1B7382123}.Release|Win32.ActiveCfg = Release|Win32
+		{408280E0-DF25-4C45-BFEF-9DB1B7382123}.Release|Win32.Build.0 = Release|Win32
+		{408280E0-DF25-4C45-BFEF-9DB1B7382123}.Release|x64.ActiveCfg = Release|x64
+		{408280E0-DF25-4C45-BFEF-9DB1B7382123}.Release|x64.Build.0 = Release|x64
+		{863473DF-0FB4-4A2D-8960-8C424D046923}.Debug|ARM64.ActiveCfg = Debug|x64
+		{863473DF-0FB4-4A2D-8960-8C424D046923}.Debug|ARM64.Build.0 = Debug|x64
+		{863473DF-0FB4-4A2D-8960-8C424D046923}.Debug|Win32.ActiveCfg = Debug|Win32
+		{863473DF-0FB4-4A2D-8960-8C424D046923}.Debug|Win32.Build.0 = Debug|Win32
+		{863473DF-0FB4-4A2D-8960-8C424D046923}.Debug|x64.ActiveCfg = Debug|x64
+		{863473DF-0FB4-4A2D-8960-8C424D046923}.Debug|x64.Build.0 = Debug|x64
+		{863473DF-0FB4-4A2D-8960-8C424D046923}.Release|ARM64.ActiveCfg = Release|x64
+		{863473DF-0FB4-4A2D-8960-8C424D046923}.Release|ARM64.Build.0 = Release|x64
+		{863473DF-0FB4-4A2D-8960-8C424D046923}.Release|Win32.ActiveCfg = Release|Win32
+		{863473DF-0FB4-4A2D-8960-8C424D046923}.Release|Win32.Build.0 = Release|Win32
+		{863473DF-0FB4-4A2D-8960-8C424D046923}.Release|x64.ActiveCfg = Release|x64
+		{863473DF-0FB4-4A2D-8960-8C424D046923}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
