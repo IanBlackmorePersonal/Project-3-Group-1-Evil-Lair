@@ -193,6 +193,7 @@ int main() {
 
 	// destory the window and cleanup the OpenGL context
 	CloseWindow();
+	*/
 	return 0;
 
 }
