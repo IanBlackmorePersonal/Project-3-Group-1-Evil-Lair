@@ -4,6 +4,7 @@
 #include "UndergroundGarden.h"
 #include "Laser.h"
 #include "Radar.h"
+#include "MonsterContainmentUnit.h"
 class HMIHandler {
 public:
     int menuButtonClicked(Vector2 mousePoint);
@@ -15,6 +16,9 @@ public:
     void drawLaserAndRadar(BigLaser& laser, Radar& radar);
     void inLaserAndRadarMenu(Vector2 mousePoint, BigLaser& laser, Radar& radar);
     void handleLaserTargetInput(BigLaser& laser);
+    void drawMonsterContainmentStats(MonsterContainmentUnit& m);
+
+    void inMonsterContainmentUnitMenu(Vector2 mousePoint, MonsterContainmentUnit& m);
 private:
     char latitudeInput[10] = "0.0";
     char longitudeInput[10] = "0.0";

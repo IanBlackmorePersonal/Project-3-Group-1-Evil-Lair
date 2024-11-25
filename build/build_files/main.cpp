@@ -57,19 +57,28 @@ int main() {
 	Radar radar;      // Creates an instance of Radar
 
 	MonsterContainmentUnit m;
+	
+	
+	/*
 	m.monitorVitals();
-	m.updateHungerOverTime(18.2);
+	m.updateHungerOverTime();
 	m.checkHungerLevel();
 	m.feedMonster();
 	m.updateAngerOverTime(200);
 	m.sedateMonster();
 	m.releaseMonster();
+	*/
 
 	ForceField f;
+	/*
 	f.isForceFieldActive();
 	f.detectBreach();
 	f.chargeForceField(20);
 	
+
+
+
+
 
 	// Tell the window to use vysnc and work on high DPI displays
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
@@ -91,7 +100,7 @@ int main() {
 	Texture UDGBackground = LoadTexture("UndergroundGardenBackground.png");
 	// the rest are currently not created
 	Texture facilityBackground = LoadTexture("UndergroundGardenBackground.png");
-	Texture monsterBackground = LoadTexture("UndergroundGardenBackground.png");
+	Texture monsterBackground = LoadTexture("MonsterContainmentUnitBackground.png");
 	Texture laserBackground = LoadTexture("");
 	Texture aquariumBackground = LoadTexture("UndergroundGardenBackground.png");
 
@@ -159,6 +168,10 @@ int main() {
 		}
 		if (currentScreen == LASER_SCREEN) {
 			hmiHandler.inLaserAndRadarMenu(mousePoint, laser, radar);
+		}
+		if (currentScreen == MONSTER_SCREEN) {
+			auto startTime = std::chrono::high_resolution_clock::now();
+			hmiHandler.inMonsterContainmentUnitMenu(mousePoint, m);
 		}
 			
 		
