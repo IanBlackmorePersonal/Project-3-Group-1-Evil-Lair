@@ -74,7 +74,7 @@ int main() {
 	f.isForceFieldActive();
 	f.detectBreach();
 	f.chargeForceField(20);
-	
+	*/
 
 
 
@@ -193,7 +193,7 @@ int main() {
 
 	// destory the window and cleanup the OpenGL context
 	CloseWindow();
-	*/
+	
 	return 0;
 
 }

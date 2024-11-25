@@ -1,9 +1,9 @@
-Deployed
+Undeployed
 Undamaged
 100.0
-Deployed
+Undeployed
 Undamaged
-98.0
-Deployed
+100.0
+Undeployed
 Undamaged
 100.0
