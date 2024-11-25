@@ -24,8 +24,6 @@ MonsterContainmentUnit::~MonsterContainmentUnit() {
 void MonsterContainmentUnit::feedMonster() {
     hungerLevel = max(0.0f, min(hungerLevel + 30, 100.0f));
     angerLevel = max(0.0f, min(angerLevel - 5, 100.0f));
-
-    cout << "Feeding monster. Hunger level: " << hungerLevel << "%" << endl;
 }
 
 void MonsterContainmentUnit::monitorVitals() {
@@ -35,19 +33,16 @@ void MonsterContainmentUnit::monitorVitals() {
 
 void MonsterContainmentUnit::sedateMonster() {
     angerLevel = max(0.0f, min(angerLevel - 30, 100.0f));
-    cout << "Sedating monster. Anger Level is now: " << angerLevel << "%" << endl;
 }
 
 void MonsterContainmentUnit::releaseMonster() {
     if (containmentStatus == true) {
         containmentStatus = false;
-        cout << "Monster has been released!" << endl;
     }
 }
 
 void MonsterContainmentUnit::checkHungerLevel() {
    if (hungerLevel <= 25) {
-        cout << "Warning: Monster is starving!" << endl;
         angerLevel = max(0.0f, min(angerLevel + 50, 100.0f));
    }
 
@@ -65,13 +60,10 @@ void MonsterContainmentUnit::updateHungerOverTime() {
     if (hungerLevel < 50) {
         checkHungerLevel();
     }
-    cout << "Updated hunger level based on time: " << hungerLevel << "%" << endl;
 }
 
 void MonsterContainmentUnit::updateAngerOverTime() {
     angerLevel = max(0.0f, min(angerLevel + (timeElapsed, 0.0005f), 100.0f));
-
-    cout << "Updated anger level based on time: " << angerLevel << "%" << endl;
     checkAngerLevel();
     
 }

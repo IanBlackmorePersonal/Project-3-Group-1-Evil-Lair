@@ -70,12 +70,13 @@ int main() {
 	*/
 
 	ForceField f;
+
 	/*
 	f.isForceFieldActive();
 	f.detectBreach();
 	f.chargeForceField(20);
+	
 	*/
-
 
 
 
