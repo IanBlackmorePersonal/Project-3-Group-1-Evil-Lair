@@ -12,7 +12,10 @@ class Aquarium
 
 public:
 	Aquarium();
-	~Aquarium();
 
+	int readFile();
 
+	void updateTank(int TankNo, double pHUpdate, double tempUpdate, double oxygenationUpdate);
+	
+	int transferToQuarantine(int TankNo);
 };
