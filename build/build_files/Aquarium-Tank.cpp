@@ -1,4 +1,5 @@
 #include "Aquarium-Tank.h"
+#include "Aquarium-Animal.h"
 #include <math.h>
 
 Tank::Tank()
@@ -8,6 +9,7 @@ Tank::Tank()
 	oxygenation = 90;
 	waterQuality = 100;
 	population = 5;
+	tankAnimal = createAnimal("NULL");
 	strcpy(TankName, "TankDefault\n");
 }
 
@@ -96,8 +98,8 @@ void Tank::alterTemperature(double alteration) {
 void Tank::calculateWaterQuality() {
 	//this is wrong 100%
 	double calculatedVal = 0.0;
-	calculatedVal += fabs(pH - 7)*50;
-	calculatedVal += fabs(oxygenation - 90) * 50;
+	calculatedVal += (50 - (fabs(pH - 7)*50));
+	calculatedVal += 50 - (abs(oxygenation - 90) % 50);
 	waterQuality = calculatedVal;
 }
 

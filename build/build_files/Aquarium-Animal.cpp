@@ -9,3 +9,10 @@ char* Animal::getSpecies()
 {
 	return this->species;
 }
+
+Animal Animal::createAnimal(char* species)
+{
+	Animal a;
+	a.setSpecies(species);
+	return a;
+}
