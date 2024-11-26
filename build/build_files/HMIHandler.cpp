@@ -100,7 +100,7 @@ bool HMIHandler::returnToMenuButtonClicked(Vector2 mousePoint) {
 #define LARGE_BUTTON_HEIGHT 100
 
 #define REPAIR_BUTTON_1_X 72
-#define REPAIR_BUTTON_2_X 459
+#define REPAIR_BUTTON_2_X 559
 #define REPAIR_BUTTON_3_X 1084
 #define REPAIR_BUTTON_Y 458
 #define DRONE_SMALL_BUTTON_WIDTH 200
@@ -116,17 +116,17 @@ void HMIHandler::drawDrones(DroneSystem& d) {
 	DrawText(TextFormat("Battery: %.1f%%", d.drones[1]->getBatteryLevel()), 575, 210, 40, BLACK);
 	DrawText(TextFormat("Battery: %.1f%%", d.drones[2]->getBatteryLevel()), 1085, 210, 40, BLACK);
 
-	DrawText(TextFormat("Status: %s", d.drones[2]->getStatus()), 80, 330, 40, BLACK);
-	DrawText(TextFormat("Status: %s", d.drones[2]->getStatus()), 575, 330, 40, BLACK);
+	DrawText(TextFormat("Status: %s", d.drones[0]->getStatus()), 80, 330, 40, BLACK);
+	DrawText(TextFormat("Status: %s", d.drones[1]->getStatus()), 575, 330, 40, BLACK);
 	DrawText(TextFormat("Status: %s", d.drones[2]->getStatus()), 1085, 330, 40, BLACK);
 
-	DrawText(TextFormat("Damage: %s", d.drones[2]->getDamage()), 80, 400, 40, BLACK);
-	DrawText(TextFormat("Damage: %s", d.drones[2]->getDamage()), 575, 400, 40, BLACK);
+	DrawText(TextFormat("Damage: %s", d.drones[0]->getDamage()), 80, 400, 40, BLACK);
+	DrawText(TextFormat("Damage: %s", d.drones[1]->getDamage()), 575, 400, 40, BLACK);
 	DrawText(TextFormat("Damage: %s", d.drones[2]->getDamage()), 1085, 400, 40, BLACK);
 }
 
 void HMIHandler::inDroneMenu(Vector2 mousePoint, DroneSystem& d) {
-
+	
 	drawDrones(d);
 
 	if (mousePoint.x > RECALL_BUTTON_X && mousePoint.x < RECALL_BUTTON_X + LARGE_BUTTON_WIDTH) {
@@ -401,4 +401,82 @@ void HMIHandler::inLaserAndRadarMenu(Vector2 mousePoint, BigLaser& laser, Radar&
 			radar.scanForEntities();
 		}
 	}
+}
+
+#define HUNGER_BAR_X 130
+#define HUNGER_BAR_Y 291
+#define VITAL_BAR_WIDTH 703
+#define VITAL_BAR_HEIGHT 103
+#define ANGER_BAR_X 134
+#define ANGER_BAR_Y 523
+#define FEED_BTN_X 136
+#define FEED_BTN_Y 700
+#define SEDATE_BTN_X 575
+#define ROUND_BTN_WIDTH 250
+#define RELEASE_BTN_X 1037
+#define RELEASE_BTN_Y 270
+#define RELEASE_BTN_WIDTH 389
+
+
+
+void HMIHandler::drawMonsterContainmentStats(MonsterContainmentUnit& m) {
+	DrawRectangle(HUNGER_BAR_X, HUNGER_BAR_Y, (m.getHungerLevel() * 10 * 0.703), VITAL_BAR_HEIGHT, ORANGE);
+	DrawText(TextFormat("%.1f%%", m.getHungerLevel()), 410, 330, 40, BLACK);
+	
+	DrawRectangle(ANGER_BAR_X, ANGER_BAR_Y, (m.getAngerLevel() * 10 * 0.703), VITAL_BAR_HEIGHT, RED);
+	DrawText(TextFormat("%.1f%%", m.getAngerLevel()), 410, 560, 40, BLACK);
+	
+	if (m.isContained() == true) {
+		DrawText(TextFormat("Monster Containment status:"), 870, 130, 35, BLACK);
+		DrawText(TextFormat("Contained"), 1390, 130, 35, GREEN);
+	}
+	if (m.isContained() == false) {
+		DrawText(TextFormat("Monster Containment status:"), 870, 130, 35, BLACK);
+		DrawText(TextFormat("Breached"), 1390, 130, 35, RED);
+		DrawText(TextFormat("'WARNING'"), 1090, 730, 60, RED);
+		DrawText(TextFormat("Monster Is Out Of Containment!"), 950, 820, 35, BLACK);
+		
+	}
+	
+}
+
+
+
+void HMIHandler::inMonsterContainmentUnitMenu(Vector2 mousePoint, MonsterContainmentUnit& m) {
+	
+
+	m.updateTimeElapsed();
+	drawMonsterContainmentStats(m);
+	
+	
+	
+	m.updateAngerOverTime();
+	m.updateHungerOverTime();
+
+	if (mousePoint.x > FEED_BTN_X && mousePoint.x < FEED_BTN_X + ROUND_BTN_WIDTH) {
+		if (mousePoint.y > FEED_BTN_Y && mousePoint.y < FEED_BTN_Y + ROUND_BTN_WIDTH) {
+			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+				m.feedMonster();
+			}
+		}
+	}
+
+	if (mousePoint.x > SEDATE_BTN_X && mousePoint.x < SEDATE_BTN_X + ROUND_BTN_WIDTH) {
+		if (mousePoint.y > FEED_BTN_Y && mousePoint.y < FEED_BTN_Y + ROUND_BTN_WIDTH) {
+			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+				m.sedateMonster();
+			}
+		}
+	}
+
+	if (mousePoint.x > RELEASE_BTN_X && mousePoint.x < RELEASE_BTN_X + RELEASE_BTN_WIDTH) {
+		if (mousePoint.y > RELEASE_BTN_Y && mousePoint.y < RELEASE_BTN_Y + RELEASE_BTN_WIDTH) {
+			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+				m.releaseMonster();
+			}
+		}
+	}
+
+
+
 }

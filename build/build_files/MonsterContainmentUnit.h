@@ -1,5 +1,8 @@
 #pragma once
 #include <iostream>
+#include <chrono>
+#include <thread>
+#include <atomic>
 
 using namespace std;
 
@@ -8,6 +11,7 @@ private:
     float angerLevel;
     float hungerLevel;
     bool containmentStatus;
+    float timeElapsed;
 
 
 public:
@@ -19,11 +23,14 @@ public:
     void releaseMonster();
     void checkAngerLevel();
     void checkHungerLevel();
-    void updateHungerOverTime(float timeElapsed);
-    void updateAngerOverTime(float timeElapsed);
+    void updateHungerOverTime();
+    void updateAngerOverTime();
 
-    int getHungerLevel();
+    float getHungerLevel();
     float getAngerLevel();
+    float getTimeElapsed();
     bool isContained();
+    void updateTimeElapsed();
 
+ 
 };

@@ -43,38 +43,40 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 #define MONSTER_SCREEN 6
 
 
+#define DRONE_SYSTEM_FILEPATH "dronesystem.txt"
+#define UDG_SYSTEM_FILEPATH "undergroundgarden.txt"
 
 int main() {
-	DroneSystem d(3);
-	std::cout << "Drones amount = " << d.drones.size() << std::endl;
-	std::cout << "Drones status base = " << d.drones[0]->getStatus() << std::endl;
-	d.deployDrones();
-	std::cout << "Drones status deployed = " << d.drones[0]->getStatus() << std::endl;
-	d.drones[2]->setBatteryLevel(70.2f);
-
+	SearchAndSetResourceDir("Screens");
+	DroneSystem d;
+	d.readDataFromFile(DRONE_SYSTEM_FILEPATH);
 	UndergroundGarden u;
-	std::cout << "Humidity = " << u.getHumidity() << std::endl;
-	u.setHumidity(70);
-	std::cout << "Humidity after set = " << u.getHumidity() << std::endl;
+	u.readDataFromFile(UDG_SYSTEM_FILEPATH);
 
 	BigLaser laser;   // Creates an instance of BigLaser
 	Radar radar;      // Creates an instance of Radar
 
 	MonsterContainmentUnit m;
+	
+	
+	/*
 	m.monitorVitals();
-	m.updateHungerOverTime(18.2);
+	m.updateHungerOverTime();
 	m.checkHungerLevel();
 	m.feedMonster();
 	m.updateAngerOverTime(200);
 	m.sedateMonster();
 	m.releaseMonster();
+	*/
 
 	ForceField f;
+
+	/*
 	f.isForceFieldActive();
 	f.detectBreach();
 	f.chargeForceField(20);
 	
-
+	*/
 
 
 
@@ -90,7 +92,7 @@ int main() {
 	InitWindow(screenWidth, screenHeight, "LairHMI");
 
 	// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
-	SearchAndSetResourceDir("Screens");
+	
 
 	// Load a texture from the Screens directory
 	Texture mainbackground = LoadTexture("MainSelectScreenLairHMI.png");
@@ -99,7 +101,7 @@ int main() {
 	Texture UDGBackground = LoadTexture("UndergroundGardenBackground.png");
 	// the rest are currently not created
 	Texture facilityBackground = LoadTexture("UndergroundGardenBackground.png");
-	Texture monsterBackground = LoadTexture("UndergroundGardenBackground.png");
+	Texture monsterBackground = LoadTexture("MonsterContainmentUnitBackground.png");
 	Texture laserBackground = LoadTexture("");
 	Texture aquariumBackground = LoadTexture("UndergroundGardenBackground.png");
 
@@ -109,18 +111,6 @@ int main() {
 
 	SetTargetFPS(60);
 
-
-	// drawing
-	BeginDrawing();
-
-	// Setup the backbuffer for drawing (clear color and depth buffers)
-	ClearBackground(BLACK);
-
-	// draw our texture to the screen
-	DrawTexture(background, 0, 0, WHITE);
-
-	// end the frame and get ready for the next one  (display frame, poll input, etc...)
-	EndDrawing();
 	// HMI loop
 	int currentScreen = 0;
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
@@ -180,6 +170,10 @@ int main() {
 		if (currentScreen == LASER_SCREEN) {
 			hmiHandler.inLaserAndRadarMenu(mousePoint, laser, radar);
 		}
+		if (currentScreen == MONSTER_SCREEN) {
+			auto startTime = std::chrono::high_resolution_clock::now();
+			hmiHandler.inMonsterContainmentUnitMenu(mousePoint, m);
+		}
 			
 		
 		
@@ -200,6 +194,7 @@ int main() {
 
 	// destory the window and cleanup the OpenGL context
 	CloseWindow();
+	
 	return 0;
 
 }
