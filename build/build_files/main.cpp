@@ -102,7 +102,7 @@ int main() {
 	// the rest are currently not created
 	Texture facilityBackground = LoadTexture("UndergroundGardenBackground.png");
 	Texture monsterBackground = LoadTexture("MonsterContainmentUnitBackground.png");
-	Texture laserBackground = LoadTexture("");
+	Texture laserBackground = LoadTexture("laserbackground.png");
 	Texture aquariumBackground = LoadTexture("UndergroundGardenBackground.png");
 
 	HMIHandler hmiHandler;

@@ -1,4 +1,5 @@
 #pragma once
+
 class Radar {
 private:
     float detectionRange;
@@ -6,7 +7,8 @@ private:
 
 public:
     Radar();
-    void scanForEntities();
-    void displayEntities() const;
-    int getDetectedEntities() const;
+    void scanForEntities();       // Scans for entities
+    void resetEntities();         // Resets the detected entities to 0
+    void displayEntities() const; // Displays entities in the console
+    int getDetectedEntities() const; // Returns the number of detected entities
 };
