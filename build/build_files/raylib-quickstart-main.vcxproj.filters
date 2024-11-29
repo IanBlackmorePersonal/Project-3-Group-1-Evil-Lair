@@ -27,9 +27,6 @@
     <ClInclude Include="Aquarium-Tank.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Aquarium-Animal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ForceField.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -83,9 +80,6 @@
     <ClCompile Include="Laser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Aquarium-Animal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Aquarium-Tank.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -93,6 +87,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Facility-Sensor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Facility-Handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Aquarium-Handler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
