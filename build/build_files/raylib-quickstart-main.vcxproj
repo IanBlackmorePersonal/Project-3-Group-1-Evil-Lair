@@ -287,6 +287,7 @@
     <ClCompile Include="Aquarium-Tank.cpp" />
     <ClCompile Include="Drone.cpp" />
     <ClCompile Include="DroneSystem.cpp" />
+    <ClCompile Include="Facility-Handler.cpp" />
     <ClCompile Include="Facility-POE.cpp" />
     <ClCompile Include="Facility-Sensor.cpp" />
     <ClCompile Include="ForceField.cpp" />
