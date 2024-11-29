@@ -426,11 +426,11 @@ void HMIHandler::drawMonsterContainmentStats(MonsterContainmentUnit& m) {
 	DrawRectangle(ANGER_BAR_X, ANGER_BAR_Y, (m.getAngerLevel() * 10 * 0.703), VITAL_BAR_HEIGHT, RED);
 	DrawText(TextFormat("%.1f%%", m.getAngerLevel()), 410, 560, 40, BLACK);
 	
-	if (m.isContained() == true) {
+	if (m.getContainmentStatus() == true) {
 		DrawText(TextFormat("Monster Containment status:"), 870, 130, 35, BLACK);
 		DrawText(TextFormat("Contained"), 1390, 130, 35, GREEN);
 	}
-	if (m.isContained() == false) {
+	if (m.getContainmentStatus() == false) {
 		DrawText(TextFormat("Monster Containment status:"), 870, 130, 35, BLACK);
 		DrawText(TextFormat("Breached"), 1390, 130, 35, RED);
 		DrawText(TextFormat("'WARNING'"), 1090, 730, 60, RED);
@@ -445,13 +445,13 @@ void HMIHandler::drawMonsterContainmentStats(MonsterContainmentUnit& m) {
 void HMIHandler::inMonsterContainmentUnitMenu(Vector2 mousePoint, MonsterContainmentUnit& m) {
 	
 
-	m.updateTimeElapsed();
 	drawMonsterContainmentStats(m);
 	
 	
-	
-	m.updateAngerOverTime();
-	m.updateHungerOverTime();
+	if (m.getContainmentStatus() == true) {
+		m.updateAngerOverTime();
+		m.updateHungerOverTime();
+	}
 
 	if (mousePoint.x > FEED_BTN_X && mousePoint.x < FEED_BTN_X + ROUND_BTN_WIDTH) {
 		if (mousePoint.y > FEED_BTN_Y && mousePoint.y < FEED_BTN_Y + ROUND_BTN_WIDTH) {
@@ -480,3 +480,61 @@ void HMIHandler::inMonsterContainmentUnitMenu(Vector2 mousePoint, MonsterContain
 
 
 }
+
+#define FF_BAR_X 1095
+#define FF_BAR_Y 122
+#define FF_BAR_WIDTH 293
+#define FF_BAR_HEIGHT 725
+
+
+int timer = 1;
+
+void HMIHandler::drawForceFieldStats(ForceField& f) {
+	DrawRectangle(
+		FF_BAR_X,
+		FF_BAR_Y + FF_BAR_HEIGHT - (f.getChargeLevel() / 100.0f * FF_BAR_HEIGHT),
+		FF_BAR_WIDTH,
+		f.getChargeLevel() / 100.0f * FF_BAR_HEIGHT,
+		SKYBLUE
+	);
+	DrawText(TextFormat("%.1f%%", f.getChargeLevel()), 1185, 450, 40, BLACK);
+
+	DrawText(TextFormat("Force Field status:"), 150, 163, 35, BLACK);
+	if (f.isForceFieldActive() == true) {
+		DrawText(TextFormat("Active"), 500, 163, 35, SKYBLUE);
+	}
+	if (f.isForceFieldActive() == false) {
+		DrawText(TextFormat("Compromised"), 500, 163, 35, RED);
+	}
+
+	DrawText(TextFormat("Time Until Fully Charged:", f.timeToFullCharge()), 150, 250, 35, BLACK);
+	DrawText(TextFormat("%.1f%", f.timeToFullCharge()), 600, 250, 35, SKYBLUE);
+	DrawText(TextFormat("seconds"), 700, 250, 35, BLACK);
+
+	if (f.isForceFieldActive() == false) {
+		DrawText(TextFormat("'WARNING'"), 320, 400, 100, RED);
+		DrawText(TextFormat("Force Field Has Been"), 255, 600, 60, BLACK);
+		DrawText(TextFormat("BREACHED"), 310, 750, 100, RED);
+	}
+
+	
+}
+	
+
+void HMIHandler::inForceFieldMenu(Vector2 mousePoint, ForceField& f) {
+
+	f.chargeForceField();
+	if (f.isForceFieldActive() == false) {
+		timer = timer + 1;
+		if (timer == 3600) {
+			f.setForceFieldChargingStatus(true);
+			f.setForceFieldStatus(true);
+		}
+	}
+	drawForceFieldStats(f);
+	
+	
+
+}
+
+

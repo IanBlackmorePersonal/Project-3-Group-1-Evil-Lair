@@ -3,6 +3,8 @@
 #include <chrono>
 #include <thread>
 #include <atomic>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -11,14 +13,12 @@ private:
     float angerLevel;
     float hungerLevel;
     bool containmentStatus;
-    float timeElapsed;
 
 
 public:
     MonsterContainmentUnit();
     ~MonsterContainmentUnit();
     void feedMonster();
-    void monitorVitals();
     void sedateMonster();
     void releaseMonster();
     void checkAngerLevel();
@@ -26,11 +26,14 @@ public:
     void updateHungerOverTime();
     void updateAngerOverTime();
 
+
     float getHungerLevel();
     float getAngerLevel();
-    float getTimeElapsed();
-    bool isContained();
-    void updateTimeElapsed();
+    bool getContainmentStatus();
+    void setHungerLevel(float hungerAmount);
+    void setAngerLevel(float angerLevel);
+    void setContainmentStatus(bool containmentStatus);
 
- 
+    void MCUwriteToFile(const string& filename);
+    void MCUreadFromFile(const string& filename);
 };
