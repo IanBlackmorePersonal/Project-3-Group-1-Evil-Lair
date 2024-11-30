@@ -14,6 +14,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DroneSystemTests", "DroneSy
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UDGTesting", "UDGTesting\UDGTesting.vcxproj", "{863473DF-0FB4-4A2D-8960-8C424D046923}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MonsterContainmentUnitTests", "MonsterContainmentUnitTests\MonsterContainmentUnitTests.vcxproj", "{E68EDB99-E094-4757-BBF7-30AFDADD10D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -72,8 +74,23 @@ Global
 		{863473DF-0FB4-4A2D-8960-8C424D046923}.Release|Win32.Build.0 = Release|Win32
 		{863473DF-0FB4-4A2D-8960-8C424D046923}.Release|x64.ActiveCfg = Release|x64
 		{863473DF-0FB4-4A2D-8960-8C424D046923}.Release|x64.Build.0 = Release|x64
+		{E68EDB99-E094-4757-BBF7-30AFDADD10D3}.Debug|ARM64.ActiveCfg = Debug|x64
+		{E68EDB99-E094-4757-BBF7-30AFDADD10D3}.Debug|ARM64.Build.0 = Debug|x64
+		{E68EDB99-E094-4757-BBF7-30AFDADD10D3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E68EDB99-E094-4757-BBF7-30AFDADD10D3}.Debug|Win32.Build.0 = Debug|Win32
+		{E68EDB99-E094-4757-BBF7-30AFDADD10D3}.Debug|x64.ActiveCfg = Debug|x64
+		{E68EDB99-E094-4757-BBF7-30AFDADD10D3}.Debug|x64.Build.0 = Debug|x64
+		{E68EDB99-E094-4757-BBF7-30AFDADD10D3}.Release|ARM64.ActiveCfg = Release|x64
+		{E68EDB99-E094-4757-BBF7-30AFDADD10D3}.Release|ARM64.Build.0 = Release|x64
+		{E68EDB99-E094-4757-BBF7-30AFDADD10D3}.Release|Win32.ActiveCfg = Release|Win32
+		{E68EDB99-E094-4757-BBF7-30AFDADD10D3}.Release|Win32.Build.0 = Release|Win32
+		{E68EDB99-E094-4757-BBF7-30AFDADD10D3}.Release|x64.ActiveCfg = Release|x64
+		{E68EDB99-E094-4757-BBF7-30AFDADD10D3}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0A8A92D-C263-4F80-B2C0-38F520C74594}
 	EndGlobalSection
 EndGlobal
