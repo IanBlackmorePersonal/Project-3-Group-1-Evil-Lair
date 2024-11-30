@@ -35,7 +35,7 @@ void MonsterContainmentUnit::releaseMonster() {
 
 void MonsterContainmentUnit::checkHungerLevel() {
    if (hungerLevel <= 25) {
-        angerLevel = max(0.0f, min(angerLevel + 0.0010f, 100.0f));
+        angerLevel = max(0.0f, min(angerLevel + 0.008f, 100.0f));
    }
 
 }
@@ -55,7 +55,7 @@ void MonsterContainmentUnit::updateHungerOverTime() {
 }
 
 void MonsterContainmentUnit::updateAngerOverTime() {
-    angerLevel = max(0.0f, min(angerLevel + (0.0005f), 100.0f));
+    angerLevel = max(0.0f, min(angerLevel + (0.003f), 100.0f));
     checkAngerLevel();
     
 }
