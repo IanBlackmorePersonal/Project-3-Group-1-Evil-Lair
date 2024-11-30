@@ -32,7 +32,7 @@ public:
     bool getContainmentStatus();
     void setHungerLevel(float hungerAmount);
     void setAngerLevel(float angerLevel);
-    void setContainmentStatus(bool containmentStatus);
+    void setContainmentStatus(bool ContainmentStatus);
 
     void MCUwriteToFile(const string& filename);
     void MCUreadFromFile(const string& filename);

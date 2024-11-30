@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
-    <ProjectGuid>{E68EDB99-E094-4757-BBF7-30AFDADD10D3}</ProjectGuid>
+    <ProjectGuid>{581C1985-65F4-476A-9E7F-E5B336C94235}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>MonsterContainmentUnitTests</RootNamespace>
+    <RootNamespace>ForceFieldTests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectSubType>NativeUnitTestProject</ProjectSubType>
   </PropertyGroup>
@@ -156,7 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MonsterContainmentUnitTests.cpp" />
+    <ClCompile Include="ForceFieldTests.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -166,11 +166,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\build\build_files\raylib-quickstart-main.vcxproj">
-      <Project>{7223710c-5e1d-9a5e-478a-306f332300cb}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
