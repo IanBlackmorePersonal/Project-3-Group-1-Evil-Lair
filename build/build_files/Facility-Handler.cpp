@@ -24,6 +24,17 @@ int Facility::engageLockdown()
 	return 0;
 }
 
+void Facility::disableLockdown()
+{
+	for (int i = 0; i < FACILITY_SENSOR_COUNT; i++) {
+		sensors[i].setPowerState(false);
+	}
+	for (int j = 0; j < POE_COUNT; j++) {
+		if (pointsOfEntry[j].getIsBreached() == false)
+			pointsOfEntry[j].setIsOpen(true);
+	}
+}
+
 void Facility::checkSensors()
 {
 	for (int i = 0; i < FACILITY_SENSOR_COUNT; i++) {
@@ -38,6 +49,9 @@ void Facility::checkPOEs()
 	for (int i = 0; i < FACILITY_SENSOR_COUNT; i++) {
 		if (pointsOfEntry[i].getIsBreached() == true) {
 			//something something update icon
+		}
+		else if (pointsOfEntry[i].getDamageLevel() >= 100) {
+			pointsOfEntry[i].setIsBreached(true);
 		}
 	}
 }
