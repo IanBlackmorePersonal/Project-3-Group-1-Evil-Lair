@@ -1,5 +1,6 @@
 #include "Aquarium-Tank.h"
-#include "Aquarium-Animal.h"
+#include <stdlib.h>
+#include <string>
 #include <math.h>
 
 Tank::Tank()

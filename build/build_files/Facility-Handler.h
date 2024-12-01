@@ -1,6 +1,7 @@
 #pragma once
 #include "Facility-POE.h"
 #include "Facility-Sensor.h"
+#include <stdlib.h>
 //Feel free to lower those numbers btw
 #define POE_COUNT 5
 #define FACILITY_SENSOR_COUNT 7
@@ -26,6 +27,8 @@ class Facility {
 
 public:
 	Facility();
+
+
 
 	int engageLockdown();
 
