@@ -100,10 +100,15 @@ int main() {
 	Texture droneBackground = LoadTexture("droneSystemBackground.png");
 	Texture UDGBackground = LoadTexture("UndergroundGardenBackground.png");
 	// the rest are currently not created
-	Texture facilityBackground = LoadTexture("UndergroundGardenBackground.png");
+	Texture facilityBackground = LoadTexture("FacilityBg.png");
 	Texture monsterBackground = LoadTexture("MonsterContainmentUnitBackground.png");
 	Texture laserBackground = LoadTexture("");
-	Texture aquariumBackground = LoadTexture("UndergroundGardenBackground.png");
+	Texture aquariumBackground = LoadTexture("AquariumHMIBg.png");
+	//All the Facility icon Textures (there are many)
+	Texture openIcon = LoadTexture("POE-Open");
+	Texture closedIcon = LoadTexture("POE-Closed");
+	Texture breachedIcon = LoadTexture("POE-Breached");
+
 
 	HMIHandler hmiHandler;
 

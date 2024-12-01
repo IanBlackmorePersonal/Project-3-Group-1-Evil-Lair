@@ -440,6 +440,20 @@ void HMIHandler::drawMonsterContainmentStats(MonsterContainmentUnit& m) {
 	
 }
 
+// Facility Button X Y s
+#define FORCEFIELD_BUT_X 610
+#define FORCEFIELD_BUT_Y 800
+#define FORCEFIELDBUT_WID 598
+#define FORCEFIELDBUT_HEI 142
+#define FULL_LOCKDOWN_BUT_X 42
+#define FULL_LOCKDOWN_BUT_Y 756
+#define FULL_LOCKDOWN_BUT_WH 226 //square.
+
+void HMIHandler::drawFacilityMap(Facility& f)
+{
+	//coords. ugh.
+}
+
 
 
 void HMIHandler::inMonsterContainmentUnitMenu(Vector2 mousePoint, MonsterContainmentUnit& m) {

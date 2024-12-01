@@ -2,6 +2,9 @@
 
 Facility::Facility()
 {
+	//POEs THEN                                      |sensors        
+	int listofX[30] = {200, 434, 920, 1165, 860, 110, 690, 620};
+	int listofY[30] = {375, 530, 530, 450, 375, 500, 530, 375};
 	//figure out your x and y stuff
 	for (int i = 0; i < FACILITY_SENSOR_COUNT; i++) {
 		sensors[i].CreateSensor(100, 100, 100, 100, i);
