@@ -180,6 +180,7 @@ int main() {
 			}
 		}
 		if (currentScreen == FF_SCREEN) {
+			DrawTexture(forceFieldBackground, 0, 0, WHITE);
 			hmiHandler.inForceFieldMenu(mousePoint, f);
 		}
 			
