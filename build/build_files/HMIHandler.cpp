@@ -454,9 +454,8 @@ void HMIHandler::drawFacilityMap(Facility& f)
 	//coords. ugh.
 }
 
-void HMIHandler::inFacilityMenu(Vector2 mousePoint, Facility& facility)
+void HMIHandler::inFacilityMenu(Vector2 mousePoint, Facility& facility, bool& inLockdown)
 {
-	bool inLockdown = false;
 	facility.checkSensors();
 	facility.checkPOEs();
 

@@ -56,6 +56,10 @@ int main() {
 	BigLaser laser;   // Creates an instance of BigLaser
 	Radar radar;      // Creates an instance of Radar
 
+	Facility facility;
+	bool inLockdown = false; //Need this for somehting :)
+	Aquarium aquarium;
+
 	MonsterContainmentUnit m;
 	
 	
@@ -178,6 +182,9 @@ int main() {
 		if (currentScreen == MONSTER_SCREEN) {
 			auto startTime = std::chrono::high_resolution_clock::now();
 			hmiHandler.inMonsterContainmentUnitMenu(mousePoint, m);
+		}
+		if (currentScreen == FACILITY_SCREEN) {
+			hmiHandler.inFacilityMenu(mousePoint, facility, inLockdown);
 		}
 			
 		
