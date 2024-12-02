@@ -254,117 +254,184 @@ void HMIHandler::inUDGMenu(Vector2 mousePoint, UndergroundGarden& u) {
 
 }
 
-// Define constants for button and input field positions
-#define BUTTON_WIDTH 300
-#define BUTTON_HEIGHT 60
 
-// Laser Section Positions
-#define LASER_CHARGE_BUTTON_X 100
-#define LASER_CHARGE_BUTTON_Y 200
-#define LASER_FIRE_BUTTON_X 100
-#define LASER_FIRE_BUTTON_Y 300
 
-// Target Input Box Positions
-#define TARGET_LAT_BOX_X 100
-#define TARGET_LAT_BOX_Y 400
-#define TARGET_LON_BOX_X 400
-#define TARGET_LON_BOX_Y 400
-#define TARGET_BOX_WIDTH 200
-#define TARGET_BOX_HEIGHT 50
+// Define positions and sizes based on the 1600x1000 application window
+#define RED_BUTTON_X 140
+#define RED_BUTTON_Y 756
+#define RED_BUTTON_RADIUS 150
 
-// Radar Section Positions
-#define RADAR_SCAN_BUTTON_X 800
-#define RADAR_SCAN_BUTTON_Y 200
+#define CHARGE_BUTTON_X 450
+#define CHARGE_BUTTON_Y 850
+#define CHARGE_BUTTON_WIDTH 120
+#define CHARGE_BUTTON_HEIGHT 40
+
+#define SCAN_BUTTON_X 1138
+#define SCAN_BUTTON_Y 680
+#define SCAN_BUTTON_WIDTH 150
+#define SCAN_BUTTON_HEIGHT 40
+
+#define SQUARE_INDICATOR_X 284
+#define SQUARE_INDICATOR_Y 737
+#define SQUARE_INDICATOR_SIZE 40
+
+#define STATUS_RECT_X 50
+#define STATUS_RECT_Y 45
+#define STATUS_RECT_WIDTH 800
+#define STATUS_RECT_HEIGHT 180
+
+#define ENTITIES_RECT_X 84
+#define ENTITIES_RECT_Y 360
+#define ENTITIES_RECT_WIDTH 720
+#define ENTITIES_RECT_HEIGHT 170
+
+#define RADAR_X 1214
+#define RADAR_Y 360
+#define RADAR_RADIUS 335
+
+// X Input Box (upper black box)
+#define INPUT_BOX_X_X 960
+#define INPUT_BOX_X_Y 750
+#define INPUT_BOX_X_WIDTH 517
+#define INPUT_BOX_X_HEIGHT 80
+
+// Y Input Box (lower black box)
+#define INPUT_BOX_Y_X 960
+#define INPUT_BOX_Y_Y 855
+#define INPUT_BOX_Y_WIDTH 517
+#define INPUT_BOX_Y_HEIGHT 80
+
+#define WHITE_BAR_X 683
+#define WHITE_BAR_Y 630
+#define WHITE_BAR_WIDTH 100
+#define WHITE_BAR_HEIGHT 341
+
+static bool showBoom = false; // Flag to determine if "BOOM" should be displayed
+static int boomTimer = 0;     // Timer for how long "BOOM" is displayed (in frames)
 
 void HMIHandler::drawLaserAndRadar(BigLaser& laser, Radar& radar) {
-	// Drawing the Laser Section
-	DrawText("Laser System", 100, 50, 40, WHITE);  // Title for Laser System
-	DrawText(TextFormat("Charge: %d%%", laser.getCharge()), 100, 120, 30, WHITE);  // Display current charge
+	// Fire button: detect if clicked
+	if (CheckCollisionPointCircle(GetMousePosition(), { RED_BUTTON_X + RED_BUTTON_RADIUS, RED_BUTTON_Y + RED_BUTTON_RADIUS }, RED_BUTTON_RADIUS)) {
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+			laser.fireLaser();
+			radar.resetEntities();  // Set entities to 0
+			showBoom = true;        // Show "BOOM" message
+			boomTimer = 120;        // Display "BOOM" for 2 seconds (assuming 60 FPS)
+		}
+	}
 
-	// Laser Buttons (Charge and Fire)
-	DrawRectangle(LASER_CHARGE_BUTTON_X, LASER_CHARGE_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT, DARKGRAY);
-	DrawText("Charge Laser", LASER_CHARGE_BUTTON_X + 20, LASER_CHARGE_BUTTON_Y + 30, 30, WHITE);
+	// Charge button: detect if clicked
+	if (CheckCollisionPointRec(GetMousePosition(), { CHARGE_BUTTON_X, CHARGE_BUTTON_Y, CHARGE_BUTTON_WIDTH, CHARGE_BUTTON_HEIGHT })) {
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+			laser.charge(20); // Increment charge by 20%
+		}
+	}
 
-	DrawRectangle(LASER_FIRE_BUTTON_X, LASER_FIRE_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT, DARKGRAY);
-	DrawText("Fire Laser", LASER_FIRE_BUTTON_X + 20, LASER_FIRE_BUTTON_Y + 30, 30, WHITE);
+	// Scan button: detect if clicked
+	if (CheckCollisionPointRec(GetMousePosition(), { SCAN_BUTTON_X, SCAN_BUTTON_Y, SCAN_BUTTON_WIDTH, SCAN_BUTTON_HEIGHT })) {
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+			radar.scanForEntities(); // Perform a radar scan
+		}
+	}
 
-	// Latitude and Longitude Input Fields
-	DrawText("Target Latitude:", TARGET_LAT_BOX_X, TARGET_LAT_BOX_Y - 40, 20, WHITE);
-	DrawText("Target Longitude:", TARGET_LON_BOX_X, TARGET_LON_BOX_Y - 40, 20, WHITE);
+	// Draw charge button
+	DrawRectangle(CHARGE_BUTTON_X, CHARGE_BUTTON_Y, CHARGE_BUTTON_WIDTH, CHARGE_BUTTON_HEIGHT, GRAY);
+	DrawText("CHARGE", CHARGE_BUTTON_X + 20, CHARGE_BUTTON_Y + 10, 20, BLACK);
 
-	// Latitude and Longitude Textboxes
-	Rectangle latBox = { TARGET_LAT_BOX_X, TARGET_LAT_BOX_Y, TARGET_BOX_WIDTH, TARGET_BOX_HEIGHT };
-	Rectangle lonBox = { TARGET_LON_BOX_X, TARGET_LON_BOX_Y, TARGET_BOX_WIDTH, TARGET_BOX_HEIGHT };
+	// Draw scan button
+	DrawRectangle(SCAN_BUTTON_X, SCAN_BUTTON_Y, SCAN_BUTTON_WIDTH, SCAN_BUTTON_HEIGHT, GRAY);
+	DrawText("SCAN", SCAN_BUTTON_X + 40, SCAN_BUTTON_Y + 10, 20, BLACK);
 
-	DrawRectangleRec(latBox, isLatBoxActive ? LIGHTGRAY : DARKGRAY);
-	DrawRectangleRec(lonBox, isLonBoxActive ? LIGHTGRAY : DARKGRAY);
+	// Square indicator (red/green based on laser charge)
+	Color squareColor = laser.getCharge() == 100 ? GREEN : RED;
+	DrawRectangle(SQUARE_INDICATOR_X, SQUARE_INDICATOR_Y, SQUARE_INDICATOR_SIZE, SQUARE_INDICATOR_SIZE, squareColor);
 
-	// Display text input
-	DrawText(latitudeInput, TARGET_LAT_BOX_X + 10, TARGET_LAT_BOX_Y + 10, 20, BLACK);
-	DrawText(longitudeInput, TARGET_LON_BOX_X + 10, TARGET_LON_BOX_Y + 10, 20, BLACK);
+	// Top green rectangle: laser status
+	if (laser.isCooling()) {
+		DrawText("LASER IS IN COOLDOWN", STATUS_RECT_X + 50, STATUS_RECT_Y + 70, 40, WHITE);
+	}
+	else if (laser.getCharge() == 100) {
+		DrawText("READY TO FIRE", STATUS_RECT_X + 180, STATUS_RECT_Y + 70, 40, WHITE);
+	}
+	else {
+		DrawText(TextFormat("LASER CHARGED: %d%%", laser.getCharge()), STATUS_RECT_X + 180, STATUS_RECT_Y + 70, 40, WHITE);
+	}
 
-	// Drawing the Radar Section (below the laser)
-	DrawText("Radar System", 800, 50, 40, WHITE);  // Title for Radar System
-	DrawText(TextFormat("Entities Detected: %d", radar.getDetectedEntities()), 800, 120, 30, WHITE);  // Display detected entities count
+	// Middle green rectangle: entities detected
+	DrawText(TextFormat("ENTITIES DETECTED: %d", radar.getDetectedEntities()), ENTITIES_RECT_X + 120, ENTITIES_RECT_Y + 60, 40, WHITE);
 
-	// Radar Button (Scan)
-	DrawRectangle(RADAR_SCAN_BUTTON_X, RADAR_SCAN_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT, DARKGRAY);
-	DrawText("Scan Radar", RADAR_SCAN_BUTTON_X + 20, RADAR_SCAN_BUTTON_Y + 30, 30, WHITE);
+	// Radar: draw dots for detected entities
+	for (int i = 0; i < radar.getDetectedEntities(); i++) {
+		float angle = (i * 360.0f) / radar.getDetectedEntities();
+		float radian = DEG2RAD * angle;
+		float x = RADAR_X + cos(radian) * (RADAR_RADIUS - 20);
+		float y = RADAR_Y + sin(radian) * (RADAR_RADIUS - 20);
+		DrawCircle(x, y, 5, RED); // Dots for entities
+	}
+
+	// Input boxes: X and Y coordinates (no colored background)
+	DrawText(latitudeInput, INPUT_BOX_X_X + 10, INPUT_BOX_X_Y + 25, 40, WHITE); // X coordinate
+	DrawText(longitudeInput, INPUT_BOX_Y_X + 10, INPUT_BOX_Y_Y + 25, 40, WHITE); // Y coordinate
+
+	// White bar: laser charge level
+	float filledHeight = WHITE_BAR_HEIGHT * (laser.getCharge() / 100.0f);
+	DrawRectangle(WHITE_BAR_X, WHITE_BAR_Y + WHITE_BAR_HEIGHT - filledHeight, WHITE_BAR_WIDTH, filledHeight, GREEN);
+	DrawRectangleLines(WHITE_BAR_X, WHITE_BAR_Y, WHITE_BAR_WIDTH, WHITE_BAR_HEIGHT, BLACK); // Outline
+
+	// Display "BOOM" message if the red button was clicked
+	if (showBoom) {
+		DrawText("BOOM!", 600, 400, 120, RED); // "BOOM" centered on screen
+		boomTimer--; // Decrease the timer
+		if (boomTimer <= 0) {
+			showBoom = false; // Stop showing "BOOM" after timer ends
+		}
+	}
 }
 
 void HMIHandler::handleLaserTargetInput(BigLaser& laser) {
-	// Define the rectangles for the text input boxes
-	Rectangle latBox = { TARGET_LAT_BOX_X, TARGET_LAT_BOX_Y, TARGET_BOX_WIDTH, TARGET_BOX_HEIGHT };
-	Rectangle lonBox = { TARGET_LON_BOX_X, TARGET_LON_BOX_Y, TARGET_BOX_WIDTH, TARGET_BOX_HEIGHT };
-
-	// Detect mouse click to activate text box for latitude and longitude
-	if (CheckCollisionPointRec(GetMousePosition(), latBox)) {
+	// Detect if the user clicks on the X or Y input boxes
+	if (CheckCollisionPointRec(GetMousePosition(), { INPUT_BOX_X_X, INPUT_BOX_X_Y, INPUT_BOX_X_WIDTH, INPUT_BOX_X_HEIGHT })) {
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 			isLatBoxActive = true;
 			isLonBoxActive = false;
 		}
 	}
-	if (CheckCollisionPointRec(GetMousePosition(), lonBox)) {
+	else if (CheckCollisionPointRec(GetMousePosition(), { INPUT_BOX_Y_X, INPUT_BOX_Y_Y, INPUT_BOX_Y_WIDTH, INPUT_BOX_Y_HEIGHT })) {
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-			isLonBoxActive = true;
 			isLatBoxActive = false;
+			isLonBoxActive = true;
 		}
 	}
 
-	// Handle text input for latitude and longitude
+	// Handle input for X coordinate
 	if (isLatBoxActive) {
 		int key = GetCharPressed();
 		while (key > 0) {
 			if (key >= 32 && key <= 125 && strlen(latitudeInput) < sizeof(latitudeInput) - 1) {
-				int len = strlen(latitudeInput);
-				latitudeInput[len] = (char)key;
-				latitudeInput[len + 1] = '\0';
+				latitudeInput[strlen(latitudeInput)] = key;
 			}
 			key = GetCharPressed();
 		}
-
 		if (IsKeyPressed(KEY_BACKSPACE) && strlen(latitudeInput) > 0) {
 			latitudeInput[strlen(latitudeInput) - 1] = '\0';
 		}
 	}
 
+	// Handle input for Y coordinate
 	if (isLonBoxActive) {
 		int key = GetCharPressed();
 		while (key > 0) {
 			if (key >= 32 && key <= 125 && strlen(longitudeInput) < sizeof(longitudeInput) - 1) {
-				int len = strlen(longitudeInput);
-				longitudeInput[len] = (char)key;
-				longitudeInput[len + 1] = '\0';
+				longitudeInput[strlen(longitudeInput)] = key;
 			}
 			key = GetCharPressed();
 		}
-
 		if (IsKeyPressed(KEY_BACKSPACE) && strlen(longitudeInput) > 0) {
 			longitudeInput[strlen(longitudeInput) - 1] = '\0';
 		}
 	}
 
-	// Update laser target when Enter is pressed
+	// Apply the coordinates to the laser when Enter is pressed
 	if (IsKeyPressed(KEY_ENTER)) {
 		float latitude = atof(latitudeInput);
 		float longitude = atof(longitudeInput);
@@ -375,32 +442,7 @@ void HMIHandler::handleLaserTargetInput(BigLaser& laser) {
 
 void HMIHandler::inLaserAndRadarMenu(Vector2 mousePoint, BigLaser& laser, Radar& radar) {
 	drawLaserAndRadar(laser, radar);
-
-	// Handle laser target input
 	handleLaserTargetInput(laser);
-
-	// Laser control buttons (Charge and Fire)
-	if (mousePoint.x > LASER_CHARGE_BUTTON_X && mousePoint.x < LASER_CHARGE_BUTTON_X + BUTTON_WIDTH &&
-		mousePoint.y > LASER_CHARGE_BUTTON_Y && mousePoint.y < LASER_CHARGE_BUTTON_Y + BUTTON_HEIGHT) {
-		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-			laser.charge(20);  // Charge in increments of 20%
-		}
-	}
-
-	if (mousePoint.x > LASER_FIRE_BUTTON_X && mousePoint.x < LASER_FIRE_BUTTON_X + BUTTON_WIDTH &&
-		mousePoint.y > LASER_FIRE_BUTTON_Y && mousePoint.y < LASER_FIRE_BUTTON_Y + BUTTON_HEIGHT) {
-		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-			laser.fireLaser();
-		}
-	}
-
-	// Radar control button (Scan)
-	if (mousePoint.x > RADAR_SCAN_BUTTON_X && mousePoint.x < RADAR_SCAN_BUTTON_X + BUTTON_WIDTH &&
-		mousePoint.y > RADAR_SCAN_BUTTON_Y && mousePoint.y < RADAR_SCAN_BUTTON_Y + BUTTON_HEIGHT) {
-		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-			radar.scanForEntities();
-		}
-	}
 }
 
 #define HUNGER_BAR_X 130
