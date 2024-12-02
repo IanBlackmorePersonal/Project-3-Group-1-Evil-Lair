@@ -196,6 +196,9 @@ int main() {
 	UnloadTexture(laserBackground);
 	UnloadTexture(aquariumBackground);
 	UnloadTexture(facilityBackground);
+	UnloadTexture(openIcon);
+	UnloadTexture(closedIcon);
+	UnloadTexture(breachedIcon);
 
 	// destory the window and cleanup the OpenGL context
 	CloseWindow();

@@ -454,6 +454,27 @@ void HMIHandler::drawFacilityMap(Facility& f)
 	//coords. ugh.
 }
 
+void HMIHandler::inFacilityMenu(Vector2 mousePoint, Facility& facility)
+{
+	bool inLockdown = false;
+	facility.checkSensors();
+	facility.checkPOEs();
+
+	if (mousePoint.x > FULL_LOCKDOWN_BUT_X && mousePoint.x < FULL_LOCKDOWN_BUT_X + FULL_LOCKDOWN_BUT_WH) {
+		if (mousePoint.y > FULL_LOCKDOWN_BUT_Y && mousePoint.y < FULL_LOCKDOWN_BUT_Y + FULL_LOCKDOWN_BUT_WH) {
+			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && inLockdown == false) {
+				facility.engageLockdown();
+				inLockdown = true;
+			}
+			else if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && inLockdown == true) {
+				facility.disableLockdown();
+				inLockdown = false;
+			}
+		
+		}
+	}
+}
+
 
 
 void HMIHandler::inMonsterContainmentUnitMenu(Vector2 mousePoint, MonsterContainmentUnit& m) {
