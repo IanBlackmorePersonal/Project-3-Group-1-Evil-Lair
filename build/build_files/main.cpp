@@ -41,6 +41,7 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 #define FACILITY_SCREEN 4
 #define LASER_SCREEN 5
 #define MONSTER_SCREEN 6
+#define FF_SCREEN 7
 
 
 #define DRONE_SYSTEM_FILEPATH "dronesystem.txt"
@@ -92,12 +93,10 @@ int main() {
 
 	Texture aquariumBackground = LoadTexture("AquariumHMIBg.png");
 	//All the Facility icon Textures (there are many)
-	Texture openIcon = LoadTexture("POE-Open");
-	Texture closedIcon = LoadTexture("POE-Closed");
-	Texture breachedIcon = LoadTexture("POE-Breached");
+	Texture openIcon = LoadTexture("POE-Open.png");
+	Texture closedIcon = LoadTexture("POE-Closed.png");
+	Texture breachedIcon = LoadTexture("POE-Breached.png");
 
-
-	Texture aquariumBackground = LoadTexture("UndergroundGardenBackground.png");
 	Texture forceFieldBackground = LoadTexture("ForceFieldBackground.png");
 
 
@@ -147,6 +146,9 @@ int main() {
 				background = monsterBackground;
 				break;
 				//intentional. do not want it to do anything on default
+			case FF_SCREEN:
+				background = forceFieldBackground;
+				break;
 			default:
 				break;
 			}
@@ -172,7 +174,13 @@ int main() {
 			
 		}
 		if (currentScreen == FACILITY_SCREEN) {
-			hmiHandler.inFacilityMenu(mousePoint, facility, inLockdown);
+			int result = hmiHandler.inFacilityMenu(mousePoint, facility, inLockdown);
+			if (result == 1) {
+				currentScreen = FF_SCREEN;
+			}
+		}
+		if (currentScreen == FF_SCREEN) {
+			hmiHandler.inForceFieldMenu(mousePoint, f);
 		}
 			
 		

@@ -454,7 +454,7 @@ void HMIHandler::drawFacilityMap(Facility& f)
 	//coords. ugh.
 }
 
-void HMIHandler::inFacilityMenu(Vector2 mousePoint, Facility& facility, bool& inLockdown)
+int HMIHandler::inFacilityMenu(Vector2 mousePoint, Facility& facility, bool& inLockdown)
 {
 	facility.checkSensors();
 	facility.checkPOEs();
@@ -474,6 +474,13 @@ void HMIHandler::inFacilityMenu(Vector2 mousePoint, Facility& facility, bool& in
 		
 		}
 	}
+	if (mousePoint.x > FORCEFIELD_BUT_X && mousePoint.x < (FORCEFIELDBUT_WID + FORCEFIELD_BUT_X)) {
+		if (mousePoint.y > FORCEFIELD_BUT_Y && mousePoint.y < (FORCEFIELD_BUT_Y + FORCEFIELDBUT_HEI)) {
+			if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+				return 1;
+		}
+	}
+	return 0;
 }
 
 

@@ -25,7 +25,7 @@ public:
     void drawMonsterContainmentStats(MonsterContainmentUnit& m);
 
     void drawFacilityMap(Facility& f);
-    void inFacilityMenu(Vector2 mousePoint, Facility& facility, bool& inLockdown);
+    int inFacilityMenu(Vector2 mousePoint, Facility& facility, bool& inLockdown);
 
     void inMonsterContainmentUnitMenu(Vector2 mousePoint, MonsterContainmentUnit& m);
     void inForceFieldMenu(Vector2 mousePoint, ForceField& f);
