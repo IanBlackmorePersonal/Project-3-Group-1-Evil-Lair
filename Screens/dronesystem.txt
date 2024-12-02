@@ -4,6 +4,6 @@ Undamaged
 Undeployed
 Undamaged
 100.0
-Undeployed
+Charging
 Undamaged
 100.0

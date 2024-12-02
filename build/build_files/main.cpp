@@ -45,6 +45,8 @@ For a C++ project simply rename the file to .cpp and re-run the build script
 
 #define DRONE_SYSTEM_FILEPATH "dronesystem.txt"
 #define UDG_SYSTEM_FILEPATH "undergroundgarden.txt"
+#define MCU_SYSTEM_FILEPATH "MonsterContainmentUnit.txt"
+#define FF_SYSTEM_FILEPATH "ForceField.txt"
 
 int main() {
 	SearchAndSetResourceDir("Screens");
@@ -61,29 +63,9 @@ int main() {
 	Aquarium aquarium;
 
 	MonsterContainmentUnit m;
-	
-	
-	/*
-	m.monitorVitals();
-	m.updateHungerOverTime();
-	m.checkHungerLevel();
-	m.feedMonster();
-	m.updateAngerOverTime(200);
-	m.sedateMonster();
-	m.releaseMonster();
-	*/
-
+	m.MCUreadFromFile(MCU_SYSTEM_FILEPATH);
 	ForceField f;
-
-	/*
-	f.isForceFieldActive();
-	f.detectBreach();
-	f.chargeForceField(20);
-	
-	*/
-
-
-
+	f.FFreadFromFile(FF_SYSTEM_FILEPATH);
 
 	// Tell the window to use vysnc and work on high DPI displays
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
@@ -107,11 +89,16 @@ int main() {
 	Texture facilityBackground = LoadTexture("FacilityBg.png");
 	Texture monsterBackground = LoadTexture("MonsterContainmentUnitBackground.png");
 	Texture laserBackground = LoadTexture("");
+
 	Texture aquariumBackground = LoadTexture("AquariumHMIBg.png");
 	//All the Facility icon Textures (there are many)
 	Texture openIcon = LoadTexture("POE-Open");
 	Texture closedIcon = LoadTexture("POE-Closed");
 	Texture breachedIcon = LoadTexture("POE-Breached");
+
+
+	Texture aquariumBackground = LoadTexture("UndergroundGardenBackground.png");
+	Texture forceFieldBackground = LoadTexture("ForceFieldBackground.png");
 
 
 	HMIHandler hmiHandler;
@@ -156,6 +143,7 @@ int main() {
 				background = laserBackground;
 				break;
 			case MONSTER_SCREEN:
+				//background = monsterBackground;
 				background = monsterBackground;
 				break;
 				//intentional. do not want it to do anything on default
@@ -180,8 +168,8 @@ int main() {
 			hmiHandler.inLaserAndRadarMenu(mousePoint, laser, radar);
 		}
 		if (currentScreen == MONSTER_SCREEN) {
-			auto startTime = std::chrono::high_resolution_clock::now();
 			hmiHandler.inMonsterContainmentUnitMenu(mousePoint, m);
+			
 		}
 		if (currentScreen == FACILITY_SCREEN) {
 			hmiHandler.inFacilityMenu(mousePoint, facility, inLockdown);
@@ -203,9 +191,13 @@ int main() {
 	UnloadTexture(laserBackground);
 	UnloadTexture(aquariumBackground);
 	UnloadTexture(facilityBackground);
+
 	UnloadTexture(openIcon);
 	UnloadTexture(closedIcon);
 	UnloadTexture(breachedIcon);
+
+	UnloadTexture(forceFieldBackground);
+
 
 	// destory the window and cleanup the OpenGL context
 	CloseWindow();

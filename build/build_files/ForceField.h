@@ -1,5 +1,8 @@
 #pragma once
 #include <iostream>
+#include <fstream>
+#include <string>
+
 using namespace std;
 
 class ForceField {
@@ -11,11 +14,18 @@ private:
 
 public:
     ForceField();
-    ~ForceField();
+ 
     void detectBreach();
-    void chargeForceField(float timeElapsed);
+    void chargeForceField();
     bool isForceFieldActive();
     float getChargeLevel();
-    string getAlertMessage();
     void setForceFieldStatus(bool status);
+    void setForceFieldCharge(float charge);
+    void setForceFieldChargingStatus(bool chargingStatus);
+    void forceFieldAttack(float damage);
+    float timeToFullCharge();
+    void FFwriteToFile(const string& filename);
+    void FFreadFromFile(const string& filename);
+
+
 };

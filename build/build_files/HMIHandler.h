@@ -5,8 +5,12 @@
 #include "Laser.h"
 #include "Radar.h"
 #include "MonsterContainmentUnit.h"
+
 #include "Aquarium-Handler.h"
 #include "Facility-Handler.h"
+
+#include "ForceField.h"
+
 class HMIHandler {
 public:
     int menuButtonClicked(Vector2 mousePoint);
@@ -23,8 +27,9 @@ public:
     void drawFacilityMap(Facility& f);
     void inFacilityMenu(Vector2 mousePoint, Facility& facility, bool& inLockdown);
 
-
     void inMonsterContainmentUnitMenu(Vector2 mousePoint, MonsterContainmentUnit& m);
+    void inForceFieldMenu(Vector2 mousePoint, ForceField& f);
+    void drawForceFieldStats(ForceField& f);
 private:
     char latitudeInput[10] = "0.0";
     char longitudeInput[10] = "0.0";
