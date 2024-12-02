@@ -460,14 +460,16 @@ void HMIHandler::inFacilityMenu(Vector2 mousePoint, Facility& facility)
 	facility.checkSensors();
 	facility.checkPOEs();
 
-	if (mousePoint.x > FULL_LOCKDOWN_BUT_X && mousePoint.x < FULL_LOCKDOWN_BUT_X + FULL_LOCKDOWN_BUT_WH) {
-		if (mousePoint.y > FULL_LOCKDOWN_BUT_Y && mousePoint.y < FULL_LOCKDOWN_BUT_Y + FULL_LOCKDOWN_BUT_WH) {
+	if (mousePoint.x > FULL_LOCKDOWN_BUT_X && mousePoint.x < (FULL_LOCKDOWN_BUT_X + FULL_LOCKDOWN_BUT_WH)) {
+		if (mousePoint.y > FULL_LOCKDOWN_BUT_Y && mousePoint.y < (FULL_LOCKDOWN_BUT_Y + FULL_LOCKDOWN_BUT_WH)) {
 			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && inLockdown == false) {
 				facility.engageLockdown();
+				printf("engaging lockdown\n");
 				inLockdown = true;
 			}
 			else if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && inLockdown == true) {
 				facility.disableLockdown();
+				printf("disabling lockdown\n");
 				inLockdown = false;
 			}
 		

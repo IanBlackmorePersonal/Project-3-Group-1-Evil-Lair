@@ -2,6 +2,8 @@
 #include "Facility-POE.h"
 #include "Facility-Sensor.h"
 #include <stdlib.h>
+#include <array>
+using namespace std;
 //Feel free to lower those numbers btw
 #define POE_COUNT 5
 #define FACILITY_SENSOR_COUNT 7
@@ -23,6 +25,7 @@ class Facility {
 	FacilitySensor sensors[FACILITY_SENSOR_COUNT];
 	POE pointsOfEntry[POE_COUNT];
 	bool isLockdown;
+	array<int, (FACILITY_SENSOR_COUNT + POE_COUNT)> listofX, listofY;
 
 public:
 	Facility();

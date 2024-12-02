@@ -102,7 +102,7 @@ void Tank::calculateWaterQuality() {
 	//this is wrong 100%
 	double calculatedVal = 0.0;
 	calculatedVal += (50 - (fabs(pH - 7)*50));
-	calculatedVal += 50 - (abs(oxygenation - 90) % 50);
+	calculatedVal += 50 - fabs((oxygenation - 90) - 50);
 	waterQuality = calculatedVal;
 }
 
