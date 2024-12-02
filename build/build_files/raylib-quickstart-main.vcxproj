@@ -267,7 +267,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\resource_dir.h" />
-    <ClInclude Include="Aquarium-Animal.h" />
     <ClInclude Include="Aquarium-Handler.h" />
     <ClInclude Include="Aquarium-Tank.h" />
     <ClInclude Include="Drone.h" />
@@ -283,10 +282,11 @@
     <ClInclude Include="UndergroundGarden.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Aquarium-Animal.cpp" />
+    <ClCompile Include="Aquarium-Handler.cpp" />
     <ClCompile Include="Aquarium-Tank.cpp" />
     <ClCompile Include="Drone.cpp" />
     <ClCompile Include="DroneSystem.cpp" />
+    <ClCompile Include="Facility-Handler.cpp" />
     <ClCompile Include="Facility-POE.cpp" />
     <ClCompile Include="Facility-Sensor.cpp" />
     <ClCompile Include="ForceField.cpp" />
