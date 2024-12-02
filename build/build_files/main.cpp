@@ -58,6 +58,10 @@ int main() {
 	BigLaser laser;   // Creates an instance of BigLaser
 	Radar radar;      // Creates an instance of Radar
 
+	Facility facility;
+	bool inLockdown = false; //Need this for somehting :)
+	Aquarium aquarium;
+
 	MonsterContainmentUnit m;
 	m.MCUreadFromFile(MCU_SYSTEM_FILEPATH);
 	ForceField f;
@@ -82,11 +86,20 @@ int main() {
 	Texture droneBackground = LoadTexture("droneSystemBackground.png");
 	Texture UDGBackground = LoadTexture("UndergroundGardenBackground.png");
 	// the rest are currently not created
-	Texture facilityBackground = LoadTexture("UndergroundGardenBackground.png");
+	Texture facilityBackground = LoadTexture("FacilityBg.png");
 	Texture monsterBackground = LoadTexture("MonsterContainmentUnitBackground.png");
 	Texture laserBackground = LoadTexture("");
+
+	Texture aquariumBackground = LoadTexture("AquariumHMIBg.png");
+	//All the Facility icon Textures (there are many)
+	Texture openIcon = LoadTexture("POE-Open");
+	Texture closedIcon = LoadTexture("POE-Closed");
+	Texture breachedIcon = LoadTexture("POE-Breached");
+
+
 	Texture aquariumBackground = LoadTexture("UndergroundGardenBackground.png");
 	Texture forceFieldBackground = LoadTexture("ForceFieldBackground.png");
+
 
 	HMIHandler hmiHandler;
 
@@ -158,6 +171,9 @@ int main() {
 			hmiHandler.inMonsterContainmentUnitMenu(mousePoint, m);
 			
 		}
+		if (currentScreen == FACILITY_SCREEN) {
+			hmiHandler.inFacilityMenu(mousePoint, facility, inLockdown);
+		}
 			
 		
 		
@@ -175,7 +191,13 @@ int main() {
 	UnloadTexture(laserBackground);
 	UnloadTexture(aquariumBackground);
 	UnloadTexture(facilityBackground);
+
+	UnloadTexture(openIcon);
+	UnloadTexture(closedIcon);
+	UnloadTexture(breachedIcon);
+
 	UnloadTexture(forceFieldBackground);
+
 
 	// destory the window and cleanup the OpenGL context
 	CloseWindow();

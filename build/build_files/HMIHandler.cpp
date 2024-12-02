@@ -440,6 +440,42 @@ void HMIHandler::drawMonsterContainmentStats(MonsterContainmentUnit& m) {
 	
 }
 
+// Facility Button X Y s
+#define FORCEFIELD_BUT_X 610
+#define FORCEFIELD_BUT_Y 800
+#define FORCEFIELDBUT_WID 598
+#define FORCEFIELDBUT_HEI 142
+#define FULL_LOCKDOWN_BUT_X 42
+#define FULL_LOCKDOWN_BUT_Y 756
+#define FULL_LOCKDOWN_BUT_WH 226 //square.
+
+void HMIHandler::drawFacilityMap(Facility& f)
+{
+	//coords. ugh.
+}
+
+void HMIHandler::inFacilityMenu(Vector2 mousePoint, Facility& facility, bool& inLockdown)
+{
+	facility.checkSensors();
+	facility.checkPOEs();
+
+	if (mousePoint.x > FULL_LOCKDOWN_BUT_X && mousePoint.x < (FULL_LOCKDOWN_BUT_X + FULL_LOCKDOWN_BUT_WH)) {
+		if (mousePoint.y > FULL_LOCKDOWN_BUT_Y && mousePoint.y < (FULL_LOCKDOWN_BUT_Y + FULL_LOCKDOWN_BUT_WH)) {
+			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && inLockdown == false) {
+				facility.engageLockdown();
+				printf("engaging lockdown\n");
+				inLockdown = true;
+			}
+			else if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && inLockdown == true) {
+				facility.disableLockdown();
+				printf("disabling lockdown\n");
+				inLockdown = false;
+			}
+		
+		}
+	}
+}
+
 
 
 void HMIHandler::inMonsterContainmentUnitMenu(Vector2 mousePoint, MonsterContainmentUnit& m) {

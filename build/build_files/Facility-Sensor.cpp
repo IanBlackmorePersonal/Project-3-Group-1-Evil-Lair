@@ -8,6 +8,16 @@ FacilitySensor::FacilitySensor()
 	setPosition(0, 0, 0, 0);
 }
 
+FacilitySensor FacilitySensor::CreateSensor(int X1, int X2, int Y1, int Y2, int sensorID)
+{
+	FacilitySensor f;
+	f.setPosition(X1, X2, Y1, Y2);
+	f.setSensorID(sensorID);
+	return f;
+}
+
+
+
 void FacilitySensor::setPosition(int X1, int Y1, int X2, int Y2)
 {
 	this->sensorX1 = X1;

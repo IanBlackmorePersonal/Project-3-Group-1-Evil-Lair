@@ -10,6 +10,18 @@ POE::POE()
 	setPosition(0, 0, 0, 0);
 }
 
+POE POE::makePOE(int X1, int X2, int Y1, int Y2, int pOEID)
+{
+	POE p;
+	p.setPOEID(pOEID);
+	p.setDamageLevel(0);
+	p.setIsBreached(false);
+	p.setIsDamaged(false);
+	p.setIsOpen(true);
+	p.setPosition(X1, X2, Y1, Y2);
+	return p;
+}
+
 void POE::setPosition(int X1, int Y1, int X2, int Y2)
 {
 	this->POEX1 = X1;

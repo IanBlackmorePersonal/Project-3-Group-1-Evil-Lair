@@ -1,4 +1,6 @@
 #include "Aquarium-Tank.h"
+#include <stdlib.h>
+#include <string>
 #include <math.h>
 
 Tank::Tank()
@@ -31,15 +33,6 @@ int Tank::getPopulation()
 	return population;
 }
 
-void Tank::setAnimal(Animal animal)
-{
-	this->tankAnimal = animal;
-}
-
-Animal Tank::getAnimal()
-{
-	return tankAnimal;
-}
 
 void Tank::setWaterQuality(double waterQ)
 {
@@ -77,6 +70,18 @@ double Tank::getTemperature() {
 	return temperature;
 }
 
+Tank Tank::newTank(int population, char* tankName)
+{
+	Tank t;
+	pH = 7;
+	temperature = 25.8;
+	oxygenation = 90;
+	waterQuality = 100;
+	this->population = population;
+	strcpy(TankName, tankName);
+	return t;
+}
+
 void Tank::alterPop(int alteration) {
 	this->population += alteration;
 }
@@ -96,8 +101,8 @@ void Tank::alterTemperature(double alteration) {
 void Tank::calculateWaterQuality() {
 	//this is wrong 100%
 	double calculatedVal = 0.0;
-	calculatedVal += fabs(pH - 7)*50;
-	calculatedVal += fabs(oxygenation - 90) * 50;
+	calculatedVal += (50 - (fabs(pH - 7)*50));
+	calculatedVal += 50 - fabs((oxygenation - 90) - 50);
 	waterQuality = calculatedVal;
 }
 
