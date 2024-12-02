@@ -7,7 +7,7 @@ BigLaser::BigLaser() : chargePercentage(0), isActivated(false), firingCooldown(5
 
 void BigLaser::charge(int amount) {
     if (isCoolingDown) {
-        std::cout << "Laser is in cooldown. Please wait.\n";
+        std::cout << "Laser is cooling down. Please wait.\n";
         return;
     }
 
@@ -29,6 +29,7 @@ void BigLaser::displayCharge() const {
 void BigLaser::setTarget(float latitude, float longitude) {
     targetLatitude = latitude;
     targetLongitude = longitude;
+    std::cout << "Target set to Latitude: " << targetLatitude << ", Longitude: " << targetLongitude << "\n";
 }
 
 void BigLaser::activate() {
@@ -52,15 +53,21 @@ void BigLaser::fireLaser() {
         return;
     }
 
-    std::cout << "Firing laser at target (" << targetLatitude << ", " << targetLongitude << ")!\n";
+    // Fire the laser
+    std::cout << "BOOM! Laser fired at target (" << targetLatitude << ", " << targetLongitude << ")!\n";
     chargePercentage = 0; // Reset charge after firing
-    displayCharge();
-    isCoolingDown = true;
+    isCoolingDown = true; // Enter cooldown state
 
-    // Start cooldown timer (simulated with sleep)
-    std::this_thread::sleep_for(std::chrono::seconds(5));
-    isCoolingDown = false;
-    std::cout << "Laser is ready to be charged again.\n";
+    // Cooldown simulation (non-blocking with a separate thread)
+    std::thread([this]() {
+        std::this_thread::sleep_for(std::chrono::seconds(static_cast<int>(firingCooldown)));
+        isCoolingDown = false; // Exit cooldown state
+        std::cout << "Laser is ready to be charged again.\n";
+        }).detach();
+}
+
+bool BigLaser::isCooling() const {
+    return isCoolingDown;
 }
 
 int BigLaser::getCharge() const {

@@ -88,7 +88,7 @@ int main() {
 	// the rest are currently not created
 	Texture facilityBackground = LoadTexture("FacilityBg.png");
 	Texture monsterBackground = LoadTexture("MonsterContainmentUnitBackground.png");
-	Texture laserBackground = LoadTexture("");
+	Texture laserBackground = LoadTexture("laserbackground.png");
 
 	Texture aquariumBackground = LoadTexture("AquariumHMIBg.png");
 	//All the Facility icon Textures (there are many)
