@@ -68,6 +68,9 @@ int main() {
 	ForceField f;
 	f.FFreadFromFile(FF_SYSTEM_FILEPATH);
 
+	f.setForceFieldCharge(80);
+	f.setForceFieldChargingStatus(true);
+
 	// Tell the window to use vysnc and work on high DPI displays
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
 
