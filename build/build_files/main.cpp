@@ -86,13 +86,13 @@ int main() {
 	Texture background = mainbackground;
 	Texture droneBackground = LoadTexture("droneSystemBackground.png");
 	Texture UDGBackground = LoadTexture("UndergroundGardenBackground.png");
-	// the rest are currently not created
+	
 	Texture facilityBackground = LoadTexture("FacilityBg.png");
 	Texture monsterBackground = LoadTexture("MonsterContainmentUnitBackground.png");
 	Texture laserBackground = LoadTexture("laserbackground.png");
 
 	Texture aquariumBackground = LoadTexture("AquariumHMIBg.png");
-	//All the Facility icon Textures (there are many)
+	//All the Facility icon Textures (there are many) -UNUSED, SAD
 	Texture openIcon = LoadTexture("POE-Open.png");
 	Texture closedIcon = LoadTexture("POE-Closed.png");
 	Texture breachedIcon = LoadTexture("POE-Breached.png");

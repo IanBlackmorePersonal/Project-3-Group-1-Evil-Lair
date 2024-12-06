@@ -1,9 +1,9 @@
-Undeployed
-Damaged
-100.0
-Undeployed
-Broken
-60.0
-Undeployed
+Deployed
 Undamaged
-22.0
+100.0
+Deployed
+Undamaged
+100.0
+Deployed
+Undamaged
+100.0

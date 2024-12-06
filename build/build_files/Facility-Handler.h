@@ -9,15 +9,11 @@ using namespace std;
 #define FACILITY_SENSOR_COUNT 7
 
 /*
-* SHIT TO DO (OR CUT):
-* - MAKE IT DISPLAY A SCREEN
-* - LINK FORCEFIELD
+* THINGS TO DO (OR CUT):
+
 * - HAVE INFO ON RIGHT SIDE OF SCREEN THAT SAYS A POE or SENSOR'S STATES (like open, damage, breached yadda yadda)
-* - LINK FACILITY LOCKDOWN BUTTON TO ENGAGE LOCKDOWN
-* - MAKE DISENGAGE LOCKDOWN. I FORGOR
+
 * - HAVE ICONS DISPLAY WHEN THINGS HIT DIFF STATES (Draw Icon at the X Y of the sensor or POE, change it based on the state)
-* - BACK BUTTON (go to main menu)
-* - ... (CAN't THINK)
 */
 
 

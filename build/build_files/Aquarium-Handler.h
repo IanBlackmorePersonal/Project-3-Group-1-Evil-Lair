@@ -9,7 +9,6 @@
 /*
 TO DO:
 Get this to do anything, really. Major functions to build (or cut) are as follows:
-- DISPLAY A SCREEN
 - SWAP TANKS
 - READ FILE
 - UPDATE BASED ON FILE
@@ -17,7 +16,6 @@ Get this to do anything, really. Major functions to build (or cut) are as follow
 - EMPTY ALL TANKS
 - HAVE ALERTS (check tank values, if one of 'em's really bad, make alert)
 - BUTTONS THAT INCREASE OR DECREASE VALUES (call alterValue, give it like, 0.2 for pH, 5 for oxygenation, 0.2 for temp, etc.)
-- BACK BUTTON (go to main menu)
 
 */
 
