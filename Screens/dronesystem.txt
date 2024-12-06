@@ -1,9 +1,9 @@
 Undeployed
-Undamaged
+Damaged
 100.0
 Undeployed
+Broken
+60.0
+Undeployed
 Undamaged
-100.0
-Charging
-Undamaged
-100.0
+22.0
